@@ -17,9 +17,19 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'List',
-      url: '/list',
-      icon: 'list'
+      title: 'Fotos Enviadas',
+      url: '/envios',
+      icon: 'send'
+    },
+    {
+      title: 'Localização',
+      url: '/localizacao',
+      icon: 'map'
+    },
+    {
+      title: 'Sobre o App',
+      url: '/sobre',
+      icon: 'information-circle-outline'
     }
   ];
 
