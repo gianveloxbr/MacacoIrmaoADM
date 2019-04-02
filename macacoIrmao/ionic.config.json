@@ -1,5 +1,7 @@
 {
   "name": "macacoIrmao",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
