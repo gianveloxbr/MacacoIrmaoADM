@@ -12,8 +12,16 @@ const routes: Routes = [
     loadChildren: './home/home.module#HomePageModule'
   },
   {
-    path: 'list',
-    loadChildren: './list/list.module#ListPageModule'
+    path: 'envios',
+    loadChildren: './envios/envios.module#EnviosPageModule'
+  },
+  {
+    path: 'localizacao',
+    loadChildren: './localizacao/localizacao.module#LocalizacaoPageModule'
+  },
+  {
+    path: 'sobre',
+    loadChildren: './sobre/sobre.module#SobrePageModule'
   }
 ];
 
