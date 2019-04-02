@@ -3,40 +3,21 @@
   overflow: hidden;
 }
 
-#HomeText img{
+#LocalizacaoMapa img{
   display: block;
   margin: 0 auto;
 }
 
-#HomeText ion-title{
+#LocalizacaoMapa ion-title{
   text-align:center;
 }
 
-#HomeText{
+#LocalizacaoMapa{
   display: block;
   margin: 0 auto;
   padding-top: 5vh;
 }
 
-#btnCamera{
-  width: 10vh;
-  height: 10vh;
-  --border-radius: 50%;
-  display:block;
-  margin: 0 auto;
-}
-
-#HomeCamera{
-  display:block;
-  margin: 0 auto;
-  padding-top: 2vh;
-}
-
-#HomeText p{
+#LocalizacaoMapa p{
   text-align: center;
-}
-
-#imgLogo{
-  padding-top: 2vh;
-  padding-bottom: 2vh;
 }
