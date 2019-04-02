@@ -3,40 +3,43 @@
   overflow: hidden;
 }
 
-#HomeText img{
+#EnviosPreview img{
   display: block;
   margin: 0 auto;
 }
 
-#HomeText ion-title{
+#EnviosPreview ion-title{
   text-align:center;
 }
 
-#HomeText{
+#EnviosPreview{
   display: block;
   margin: 0 auto;
   padding-top: 5vh;
 }
 
-#btnCamera{
-  width: 10vh;
-  height: 10vh;
-  --border-radius: 50%;
-  display:block;
-  margin: 0 auto;
-}
-
-#HomeCamera{
-  display:block;
-  margin: 0 auto;
-  padding-top: 2vh;
-}
-
-#HomeText p{
+#EnviosPreview p{
   text-align: center;
 }
 
 #imgLogo{
-  padding-top: 2vh;
-  padding-bottom: 2vh;
+  width: 64px;
+  height: 64px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 5px;
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
 }
