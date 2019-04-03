@@ -27,7 +27,8 @@ const routes: Routes = [
     path: '',
     loadChildren: './preEnvio/preEnvio.module#PreEnvioPageModule'
   },
-  { path: 'enviado', loadChildren: './enviado/enviado.module#EnviadoPageModule' }
+  { path: 'enviado', loadChildren: './enviado/enviado.module#EnviadoPageModule' },
+  { path: 'admin', loadChildren: './admin/admin.module#AdminPageModule' }
 ];
 
 @NgModule({
