@@ -1,0 +1,48 @@
+.welcome-card ion-img {
+  max-height: 35vh;
+  overflow: hidden;
+}
+
+#preInfo img{
+  display: block;
+  margin: 0 auto;
+}
+
+#preInfo ion-title{
+  text-align:center;
+}
+
+#preInfo{
+  display: block;
+  margin: 0 auto;
+  padding-top: 5vh;
+}
+
+#preInfo p{
+  text-align: center;
+}
+
+#lblEnvio{
+  padding-left: 20px;  
+}
+
+#itemEnvio{
+  padding-left: 2vh;
+}
+
+#Envio{
+  display:block;
+  margin: 0 auto;
+  padding-top: 2vh;
+}
+
+#btnEnvio{
+  display:block;
+  margin: 0 auto;
+  width: 20vh;
+  height: 5vh;
+}
+
+ion-title{
+  text-align: center;
+}

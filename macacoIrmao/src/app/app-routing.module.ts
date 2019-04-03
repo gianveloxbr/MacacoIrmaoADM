@@ -22,7 +22,12 @@ const routes: Routes = [
   {
     path: 'sobre',
     loadChildren: './sobre/sobre.module#SobrePageModule'
-  }
+  },
+  {
+    path: '',
+    loadChildren: './preEnvio/preEnvio.module#PreEnvioPageModule'
+  },
+  { path: 'enviado', loadChildren: './enviado/enviado.module#EnviadoPageModule' }
 ];
 
 @NgModule({
