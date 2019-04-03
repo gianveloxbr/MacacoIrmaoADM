@@ -6,6 +6,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { AdminPage } from './admin.page';
+import { ModalFotoPage } from '../modal-foto/modal-foto.page';
+import { ModalMapaPage } from '../modal-mapa/modal-mapa.page';
+import { ModalStatusPage } from '../modal-status/modal-status.page';
 
 const routes: Routes = [
   {
@@ -21,6 +24,7 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [AdminPage]
+  declarations: [AdminPage,ModalFotoPage,ModalMapaPage,ModalStatusPage],
+  entryComponents: [ModalFotoPage,ModalMapaPage,ModalStatusPage]
 })
 export class AdminPageModule {}
