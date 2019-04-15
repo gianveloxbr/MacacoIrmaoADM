@@ -31,7 +31,8 @@ const routes: Routes = [
   { path: 'admin', loadChildren: './admin/admin.module#AdminPageModule' },
   { path: 'modal-foto', loadChildren: './modal-foto/modal-foto.module#ModalFotoPageModule' },
   { path: 'modal-mapa', loadChildren: './modal-mapa/modal-mapa.module#ModalMapaPageModule' },
-  { path: 'modal-status', loadChildren: './modal-status/modal-status.module#ModalStatusPageModule' }
+  { path: 'modal-status', loadChildren: './modal-status/modal-status.module#ModalStatusPageModule' },
+  { path: 'registro', loadChildren: './autenticacao/registro/registro.module#RegistroPageModule' }
 ];
 
 @NgModule({
