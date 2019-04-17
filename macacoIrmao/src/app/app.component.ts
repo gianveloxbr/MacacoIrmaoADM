@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { NavController, ModalController } from '@ionic/angular';
+import { AutenticacaoService } from './services/autenticacao.service';
 
 @Component({
   selector: 'app-root',
@@ -38,10 +40,13 @@ export class AppComponent {
     }
   ];
 
+  userEmail: string;
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
-    private statusBar: StatusBar
+    private statusBar: StatusBar,
+    private navCtrl: NavController,
+    private authService: AutenticacaoService
   ) {
     this.initializeApp();
   }
@@ -50,6 +55,22 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+      if(this.authService.dadosUsuario()){
+        this.userEmail = this.authService.dadosUsuario().email;
+      }else{
+        this.navCtrl.navigateBack('');
+      }
     });
+  }
+
+  logoff(){
+    this.authService.logoffUsuario()
+    .then(res => {
+      console.log(res);
+      this.navCtrl.navigateBack('');
+    })
+    .catch(error => {
+      console.log(error);
+    })
   }
 }

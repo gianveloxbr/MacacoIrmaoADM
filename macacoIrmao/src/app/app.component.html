@@ -6,7 +6,9 @@
             <ion-button shape="round" size="large" id="btnLogin">
                 <ion-icon id="btnLoginIcon" slot="icon-only" name="person"></ion-icon>
             </ion-button>
-            <ion-label class="lblLogin"> Fazer Login</ion-label>
+            <ion-button (click)="logoff()">
+                <ion-label><u>Sair</u></ion-label>
+            </ion-button>
         </ion-toolbar>
       </ion-header>
       <ion-content>
