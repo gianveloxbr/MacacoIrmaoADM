@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { SMS } from '@ionic-native/sms/ngx';
 
 @Component({
   selector: 'app-registro',
@@ -8,8 +7,9 @@ import { SMS } from '@ionic-native/sms/ngx';
 })
 export class RegistroPage implements OnInit {
 
-  constructor(private sms: SMS) { }
+  constructor() { }
 
   ngOnInit() {
   }
+
 }
