@@ -27,7 +27,7 @@ export class PerfilPage implements OnInit {
       this.user = 'perfil/' + auth.uid + '/';
       console.log(this.user);
       this.afDatabase.object(this.user).set(this.perfil)
-      .then(() => this.navCtrl.navigateForward('/Home'))
+      .then(() => this.navCtrl.navigateForward('/home'))
     })
   }
 }

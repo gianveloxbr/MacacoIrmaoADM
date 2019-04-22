@@ -5,6 +5,8 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { NavController, ModalController } from '@ionic/angular';
 import { AutenticacaoService } from './services/autenticacao.service';
+import { Perfil } from './modelos/perfil';
+
 
 @Component({
   selector: 'app-root',
@@ -12,6 +14,9 @@ import { AutenticacaoService } from './services/autenticacao.service';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
+
+  perfil = {} as Perfil;
+  
   public appPages = [
     {
       title: 'Home',
