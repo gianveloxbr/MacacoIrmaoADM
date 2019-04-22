@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+<ion-item>
+  <ion-label floating>Nome</ion-label>
+  <ion-input [(ngModel)]="perfil.nome"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label floating>Sobrenome</ion-label>
+  <ion-input [(ngModel)]="perfil.sobrenome"></ion-input>
+</ion-item>
+<ion-item>
+  <ion-label floating>Celular</ion-label>
+  <ion-input [(ngModel)]="perfil.celular" type="tel"></ion-input>
+</ion-item>
+
+<button ion-button clear block (click)="criarPerfil()">Criar Perfil</button>
+</ion-content>

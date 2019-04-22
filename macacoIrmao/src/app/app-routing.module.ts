@@ -33,7 +33,8 @@ const routes: Routes = [
   { path: 'modal-mapa', loadChildren: './modal-mapa/modal-mapa.module#ModalMapaPageModule' },
   { path: 'modal-status', loadChildren: './modal-status/modal-status.module#ModalStatusPageModule' },
   { path: 'login', loadChildren: './autenticacao/login/login.module#LoginPageModule' },
-  { path: 'registro', loadChildren: './autenticacao/registro/registro.module#RegistroPageModule' }
+  { path: 'registro', loadChildren: './autenticacao/registro/registro.module#RegistroPageModule' },
+  { path: 'perfil', loadChildren: './autenticacao/perfil/perfil.module#PerfilPageModule' }
 ];
 
 @NgModule({
