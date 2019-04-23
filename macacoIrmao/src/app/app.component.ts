@@ -16,6 +16,7 @@ import { Perfil } from './modelos/perfil';
 export class AppComponent {
 
   perfil = {} as Perfil;
+
   
   public appPages = [
     {
@@ -44,6 +45,7 @@ export class AppComponent {
       icon: 'glasses'
     }
   ];
+  
 
   userEmail: string;
   constructor(
@@ -62,6 +64,7 @@ export class AppComponent {
       this.splashScreen.hide();
       if(this.authService.dadosUsuario()){
         this.userEmail = this.authService.dadosUsuario().email;
+        console.log(this.userEmail);
       }else{
         this.navCtrl.navigateBack('');
       }

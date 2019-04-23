@@ -66,6 +66,12 @@
     "plugins": {
       "cordova-plugin-geolocation": {
         "GEOLOCATION_USAGE_DESCRIPTION": "Para localizar você."
+      },
+      "cordova-sms-plugin": {
+        "APP_ID": "310896449581241",
+        "APP_NAME": "App Febre Amarela",
+        "CLIENT_TOKEN": "ecc4fa6400bb3f514c1b8da3986bb9ca",
+        "API_VERSION": "v1.1"
       }
     }
   }

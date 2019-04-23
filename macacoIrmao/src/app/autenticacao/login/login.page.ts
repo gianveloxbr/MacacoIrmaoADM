@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { NavController } from '@ionic/angular';
 import { AutenticacaoService } from '../../services/autenticacao.service';
+import { AngularFireAuth } from '@angular/fire/auth'; 
+import { AngularFireDatabase } from '@angular/fire/database';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +17,9 @@ export class LoginPage implements OnInit {
   constructor(
     private navCtrl: NavController,
     private authService: AutenticacaoService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private afAuth: AngularFireAuth,
+    private afDatabase: AngularFireDatabase
   ) { }
 
   ngOnInit() {
@@ -32,6 +36,8 @@ export class LoginPage implements OnInit {
     });
   }
 
+  user: string;
+  nome: string;
   validation_messages = {
     'email': [
       { type: 'required', message: 'Email é necessário' },
@@ -43,12 +49,21 @@ export class LoginPage implements OnInit {
     ]
   };
 
+  //Checa se existe dados no banco, se existir vai direto para a home
+  checarPerfil(){
+    this.afAuth.authState.subscribe(auth => {
+      this.user = 'perfil/' + auth.uid + '/';
+      this.nome = this.user + 'nome';
+      this.navCtrl.navigateForward('/perfil');
+    })
+  }
+
   loginUsuario(value){
     this.authService.loginUsuario(value)
     .then(res => {
       console.log(res);
       this.errorMessage = "";
-      this.navCtrl.navigateForward('/perfil');
+      this.checarPerfil();
     }, err => {
       this.errorMessage = err.message;
     })
