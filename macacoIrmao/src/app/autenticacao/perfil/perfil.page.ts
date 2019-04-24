@@ -23,29 +23,18 @@ export class PerfilPage implements OnInit {
     private navCtrl: NavController) { }
 
   ngOnInit() {
-    this.verificaSMS();
+
   }
 
   homePage(){
     this.navCtrl.navigateForward('/home');
   }
 
-  verificaSMS(){
-    (<any>window).AccountKitPlugin.loginWithPhoneNumber({
-      useAccessToken: true,
-      defaultCountryCode: "IN",
-      facebookNotificationsEnabled: true,
-    }, data => {
-    (<any>window).AccountKitPlugin.getAccount(
-      info => this.userInfo = info,
-      err => console.log(err));
-    });
-  }
-
   criarPerfil(){
     this.afAuth.authState.subscribe(auth => {
       this.user = 'perfil/' + auth.uid + '/';
       var setUser = this.afDatabase.object(this.user).set(this.perfil);
+      var codigoCheck = 
       setUser.then(() => this.homePage());
     })
   }

@@ -15,7 +15,7 @@
 </ion-item>
 <ion-item>
   <ion-label floating>Celular</ion-label>
-  <ion-input [(ngModel)]="perfil.celular" type="tel">{{userInfo.country_code}}{{userInfo.phoneNumber}}</ion-input>
+  <ion-input id="celular" [(ngModel)]="perfil.celular" type="tel"></ion-input>
 </ion-item>
 
 <button ion-button clear block (click)="criarPerfil()">Criar Perfil</button>
