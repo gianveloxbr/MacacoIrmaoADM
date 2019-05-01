@@ -62,9 +62,8 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      if(this.authService.dadosUsuario()){
-        this.userEmail = this.authService.dadosUsuario().email;
-        console.log(this.userEmail);
+      if(this.authService.dadosUsuario()){        
+       console.log('ok');
       }else{
         this.navCtrl.navigateBack('');
       }

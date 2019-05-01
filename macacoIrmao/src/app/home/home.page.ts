@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { AutenticacaoService } from '../services/autenticacao.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -8,9 +11,13 @@ import { Component, OnInit } from '@angular/core';
 
 
 export class HomePage implements OnInit{
- 
-  constructor() {}
- 
+  
+  dados: Observable<any>
+  
+  constructor(afDatabase: AngularFireDatabase,authService:AutenticacaoService) {
+    var user = authService.dadosUsuario().uid;
+    this.dados = afDatabase.object('perfil/{user}/nome').valueChanges();
+  }
   ngOnInit(){
 
   }

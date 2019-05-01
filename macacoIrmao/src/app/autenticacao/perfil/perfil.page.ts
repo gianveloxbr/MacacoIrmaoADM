@@ -34,7 +34,6 @@ export class PerfilPage implements OnInit {
     this.afAuth.authState.subscribe(auth => {
       this.user = 'perfil/' + auth.uid + '/';
       var setUser = this.afDatabase.object(this.user).set(this.perfil);
-      var codigoCheck = 
       setUser.then(() => this.homePage());
     })
   }
