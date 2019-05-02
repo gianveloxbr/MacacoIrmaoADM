@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { NavController } from '@ionic/angular';
+import { NavController,MenuController } from '@ionic/angular';
 import { AutenticacaoService } from '../../services/autenticacao.service';
 import { AngularFireAuth } from '@angular/fire/auth'; 
-import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-login',
@@ -19,7 +19,8 @@ export class LoginPage implements OnInit {
     private authService: AutenticacaoService,
     private formBuilder: FormBuilder,
     private afAuth: AngularFireAuth,
-    private afDatabase: AngularFireDatabase
+    private afs: AngularFirestore,
+    private menu: MenuController
   ) { }
 
   ngOnInit() {
@@ -34,6 +35,11 @@ export class LoginPage implements OnInit {
         Validators.required
       ])),
     });
+  }
+
+  ionViewWillEnter() {
+    //Desativa Menu lateral na tela de login
+    this.menu.enable(false);
   }
 
   user: string;
@@ -52,9 +58,18 @@ export class LoginPage implements OnInit {
   //Checa se existe dados no banco, se existir vai direto para a home
   checarPerfil(){
     this.afAuth.authState.subscribe(auth => {
-      this.user = 'perfil/' + auth.uid + '/';
-      this.nome = this.user + 'nome';
-      this.navCtrl.navigateForward('/perfil');
+      this.user = auth.uid;
+      var getUser = this.afs.collection('perfil').doc(this.user);
+      var nav =  this.navCtrl;
+      getUser.ref.get().then((doc) =>{
+        if (doc.exists) {
+           nav.navigateForward('/home');
+        } else {
+          nav.navigateForward('/perfil');
+        }
+    }).catch(function(error) {
+        console.log("Erro ao obter documento:", error);
+    })      
     })
   }
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { AutenticacaoService } from '../../services/autenticacao.service';
-import { NavController } from '@ionic/angular';
+import { NavController,MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-registro',
@@ -28,7 +28,8 @@ export class RegistroPage implements OnInit {
   constructor(
     private navCtrl: NavController,
     private authService: AutenticacaoService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private menu: MenuController
   ) { }
 
   ngOnInit() { 
@@ -42,6 +43,11 @@ export class RegistroPage implements OnInit {
         Validators.required
       ])),
     });
+  }
+
+  ionViewWillEnter() {
+    //Desativa Menu lateral na tela de login
+    this.menu.enable(false);
   }
 
   tryRegistro(value){

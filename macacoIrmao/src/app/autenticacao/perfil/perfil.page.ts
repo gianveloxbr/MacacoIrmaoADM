@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth'; 
-import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireAuth } from '@angular/fire/auth';
+import {AngularFirestore} from '@angular/fire/firestore';
 import { Perfil } from '../../modelos/perfil';
-import { NavController } from '@ionic/angular';
+import { NavController,MenuController } from '@ionic/angular';
 import { HomePage } from 'src/app/home/home.page';
 
 
@@ -19,11 +19,16 @@ export class PerfilPage implements OnInit {
 
   userInfo: string;
 
-  constructor(private afAuth: AngularFireAuth, private afDatabase: AngularFireDatabase,
-    private navCtrl: NavController) { }
+  constructor(private afAuth: AngularFireAuth, private navCtrl: NavController, 
+    private afs: AngularFirestore, private menu:MenuController) { 
+    }
 
   ngOnInit() {
+  }
 
+  ionViewWillEnter() {
+    //Desativa Menu lateral na tela de login
+    this.menu.enable(false);
   }
 
   homePage(){
@@ -32,9 +37,9 @@ export class PerfilPage implements OnInit {
 
   criarPerfil(){
     this.afAuth.authState.subscribe(auth => {
-      this.user = 'perfil/' + auth.uid + '/';
-      var setUser = this.afDatabase.object(this.user).set(this.perfil);
-      setUser.then(() => this.homePage());
+      this.user = auth.uid;
+      var setUser = this.afs.collection('perfil').doc(this.user).set(this.perfil); 
+      setUser.then(() => this.homePage());    
     })
   }
 }

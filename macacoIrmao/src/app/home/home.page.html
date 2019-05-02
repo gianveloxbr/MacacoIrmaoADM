@@ -11,7 +11,7 @@
 
 <ion-content>    
     <div id="HomeText">
-      <ion-title>Bem-vindo(a) ao App Febre Amarela,<p>{{ (dados | async | json)?.email }}</p></ion-title>
+      <ion-title>Bem-vindo(a) ao App Febre Amarela,<div>{{ (item | async)?.nome }}</div></ion-title>
       <img id="imgLogo" src="../../assets/img/homelogo.png">
      <p>Pressione o botão da câmera para enviar uma foto.</p>
     </div>

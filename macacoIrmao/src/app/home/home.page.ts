@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFirestore,AngularFirestoreDocument } from '@angular/fire/firestore';
 import { AutenticacaoService } from '../services/autenticacao.service';
 import { Observable } from 'rxjs';
+import { MenuController } from '@ionic/angular';
+
+export interface Item { nome:String;}
 
 @Component({
   selector: 'app-home',
@@ -11,15 +14,16 @@ import { Observable } from 'rxjs';
 
 
 export class HomePage implements OnInit{
-  
-  dados: Observable<any>
-  
-  constructor(afDatabase: AngularFireDatabase,authService:AutenticacaoService) {
+
+  private dados: AngularFirestoreDocument<Item>;
+  item: Observable<Item>;
+  constructor(afs: AngularFirestore,authService:AutenticacaoService,private menu:MenuController) {
     var user = authService.dadosUsuario().uid;
-    this.dados = afDatabase.object('perfil/{user}/nome').valueChanges();
+    this.dados = afs.doc<Item>('perfil/{user}');
+    this.item = this.dados.valueChanges();
   }
   ngOnInit(){
-
+    this.menu.enable(true);
   }
 
 }
