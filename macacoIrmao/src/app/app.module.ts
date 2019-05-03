@@ -18,6 +18,8 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireModule } from '@angular/fire';
 import {AngularFireStorageModule} from '@angular/fire/storage';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { GoogleMaps, GoogleMap } from '@ionic-native/google-maps/ngx';
 
 firebase.initializeApp(environment.firebase);
 
@@ -33,12 +35,14 @@ firebase.initializeApp(environment.firebase);
     AngularFireDatabaseModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireStorageModule,
-    AngularFirestoreModule
+    AngularFirestoreModule,
   ],
   providers: [
     StatusBar,
     SplashScreen,
     AutenticacaoService,
+    Geolocation,
+    GoogleMaps,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
