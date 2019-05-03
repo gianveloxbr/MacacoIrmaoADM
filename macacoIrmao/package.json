@@ -31,6 +31,7 @@
     "cordova-android": "8.0.0",
     "cordova-browser": "5.0.4",
     "cordova-plugin-geolocation": "^4.0.1",
+    "cordova-plugin-googlemaps": "2.6.2",
     "cordova-sms-plugin": "^1.0.0",
     "core-js": "^2.5.4",
     "cors": "^2.8.5",
@@ -76,7 +77,7 @@
   "cordova": {
     "plugins": {
       "cordova-plugin-geolocation": {
-        "GEOLOCATION_USAGE_DESCRIPTION": "Para localizar você."
+        "GEOLOCATION_USAGE_DESCRIPTION": "Para localizar"
       },
       "cordova-sms-plugin": {
         "APP_ID": "310896449581241",
@@ -91,7 +92,13 @@
       "cordova-plugin-ionic-webview": {
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
       },
-      "cordova-plugin-ionic-keyboard": {}
+      "cordova-plugin-ionic-keyboard": {},
+      "cordova-plugin-googlemaps": {
+        "API_KEY_FOR_ANDROID": "AIzaSyCzj_-lvznr3ry-5fqvKPFTODGHQCatoso",
+        "API_KEY_FOR_IOS": "AIzaSyCzj_-lvznr3ry-5fqvKPFTODGHQCatoso",
+        "PLAY_SERVICES_VERSION": "15.0.1",
+        "ANDROID_SUPPORT_V4_VERSION": "27.+"
+      }
     },
     "platforms": [
       "android",

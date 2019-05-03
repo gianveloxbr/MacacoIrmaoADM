@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { NavController, ModalController } from '@ionic/angular';
 import { AutenticacaoService } from './services/autenticacao.service';
 import { Perfil } from './modelos/perfil';
+import { Environment } from '@ionic-native/google-maps';
 
 
 @Component({
@@ -67,6 +68,10 @@ export class AppComponent {
       }else{
         this.navCtrl.navigateBack('');
       }
+      Environment.setEnv({
+        'API_KEY_FOR_BROWSER_RELEASE':'AIzaSyCzj_-lvznr3ry-5fqvKPFTODGHQCatoso',
+        'API_KEY_FOR_BROWSER_DEBUG':'AIzaSyCzj_-lvznr3ry-5fqvKPFTODGHQCatoso'
+      });
     });
   }
 
