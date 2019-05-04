@@ -15,8 +15,8 @@
 </ion-item>
 <ion-item>
   <ion-label floating>Celular</ion-label>
-  <ion-input id="celular" [(ngModel)]="perfil.celular" type="tel"></ion-input>
-  <ion-button>Enviar SMS</ion-button>
+  <ion-input id="celular" [(ngModel)]="perfil.celular" type="tel">{{userInfo.country_code}} {{userInfo.phoneNumber}}</ion-input>
+  <ion-button (click)="verificarSMS()">Enviar SMS</ion-button>
 </ion-item>
 <br>
 <ion-button (click)="criarPerfil()">Criar Perfil</ion-button>

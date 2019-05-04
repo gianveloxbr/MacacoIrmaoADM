@@ -3,7 +3,6 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import {AngularFirestore} from '@angular/fire/firestore';
 import { Perfil } from '../../modelos/perfil';
 import { NavController,MenuController } from '@ionic/angular';
-import { HomePage } from 'src/app/home/home.page';
 
 
 @Component({
@@ -41,5 +40,19 @@ export class PerfilPage implements OnInit {
       var setUser = this.afs.collection('perfil').doc(this.user).set(this.perfil); 
       setUser.then(() => this.homePage());    
     })
+  }
+
+  verificarSMS(){
+    (<any>window).AccountKitPlugin.loginWithPhoneNumber({
+      useAccessToken: true,
+      defaultCountryCode: "BR",
+      facebookNotificationsEnabled: true,
+      initialPhoneNumber: ["55", this.perfil.celular]
+    }, (successdata) => {
+      (<any>window).AccountKitPlugin.getAccount(
+        info => this.userInfo = info,
+        err => console.log(err)
+      );
+    });
   }
 }

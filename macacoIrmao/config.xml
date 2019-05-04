@@ -78,10 +78,31 @@
         <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
         <splash height="2732" src="resources/ios/splash/Default@2x~universal~anyany.png" width="2732" />
     </platform>
-    <plugin name="cordova-plugin-whitelist" spec="1.3.3" />
-    <plugin name="cordova-plugin-statusbar" spec="2.4.2" />
-    <plugin name="cordova-plugin-device" spec="2.0.2" />
-    <plugin name="cordova-plugin-splashscreen" spec="5.0.2" />
-    <plugin name="cordova-plugin-ionic-webview" spec="^3.0.0" />
+    <plugin name="cordova-plugin-geolocation" spec="^4.0.1">
+        <variable name="GEOLOCATION_USAGE_DESCRIPTION" value="Para localizar" />
+    </plugin>
+    <plugin name="cordova-sms-plugin" spec="~1.0.0">
+        <variable name="APP_ID" value="310896449581241" />
+        <variable name="APP_NAME" value="App Febre Amarela" />
+        <variable name="CLIENT_TOKEN" value="ecc4fa6400bb3f514c1b8da3986bb9ca" />
+        <variable name="API_VERSION" value="v1.1" />
+    </plugin>
+    <plugin name="cordova-plugin-whitelist" spec="~1.3.3" />
+    <plugin name="cordova-plugin-statusbar" spec="~2.4.2" />
+    <plugin name="cordova-plugin-device" spec="~2.0.2" />
+    <plugin name="cordova-plugin-splashscreen" spec="~5.0.2" />
+    <plugin name="cordova-plugin-ionic-webview" spec="^3.0.0">
+        <variable name="ANDROID_SUPPORT_ANNOTATIONS_VERSION" value="27.+" />
+    </plugin>
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
+    <plugin name="cordova-plugin-accountkit" spec="~1.4.0">
+        <variable name="APP_ID" value="310896449581241" />
+        <variable name="APP_NAME" value="App Febre Amarela" />
+        <variable name="CLIENT_TOKEN" value="5065ef9ced674ff7a9474e8fbd35f9fb" />
+        <variable name="API_VERSION" value="v1.1" />
+    </plugin>
+    <plugin name="cordova-plugin-googlemaps" spec="~2.6.2">
+        <variable name="API_KEY_FOR_ANDROID" value="AIzaSyCzj_-lvznr3ry-5fqvKPFTODGHQCatoso" />
+        <variable name="API_KEY_FOR_IOS" value="AIzaSyCzj_-lvznr3ry-5fqvKPFTODGHQCatoso" />
+    </plugin>
 </widget>
