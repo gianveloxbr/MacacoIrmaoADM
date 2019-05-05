@@ -15,9 +15,17 @@
 </ion-item>
 <ion-item>
   <ion-label floating>Celular</ion-label>
-  <ion-input id="celular" [(ngModel)]="perfil.celular" type="tel"></ion-input>
-  <ion-button (click)="verificarSMS()">Enviar SMS</ion-button>
+  <ion-input [(ngModel)]="perfil.celular" type="tel" placeholder="Celular (Ex: +5534999999999)"></ion-input>
+  <ion-button (click)="enviarSMS()">Enviar SMS</ion-button>
 </ion-item>
+<br>
+<ion-item *ngIf="codeSended">
+  <ion-label floating>Celular</ion-label>
+  <ion-input [(ngModel)]="perfil.sms" type="number" placeholder="Insira o código de verificação"></ion-input>
+  <ion-button (click)="verificarSMS()">Verificar Código</ion-button>
+</ion-item>
+<br>
+<div *ngIf="sucesso">{{ mensagem }}</div>
 <br>
 <ion-button (click)="criarPerfil()">Criar Perfil</ion-button>
 </ion-content>
