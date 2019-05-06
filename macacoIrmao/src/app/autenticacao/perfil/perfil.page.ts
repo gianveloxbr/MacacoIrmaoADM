@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import {AngularFirestore} from '@angular/fire/firestore';
 import { Perfil } from '../../modelos/perfil';
-import { NavController,MenuController,Platform,LoadingController } from '@ionic/angular';
+import {NavController,MenuController,Platform} from '@ionic/angular'; 
 
 
 @Component({
@@ -12,66 +12,50 @@ import { NavController,MenuController,Platform,LoadingController } from '@ionic/
 })
 export class PerfilPage implements OnInit {
   private firebasePlugin: any;
-  codeSended: boolean;
-  verificationId: any;
-  sucesso: boolean;
   perfil = {} as Perfil;
   user: string;
-  mensagem: string;
-
   userInfo: string;
+  sms: string;
+  verificationId: any;
+  codigoEnviado: boolean;
+  sucesso: boolean;
 
   constructor(private afAuth: AngularFireAuth, private navCtrl: NavController, 
-    private afs: AngularFirestore, private menu:MenuController, public loadingCtrl: LoadingController,public platform: Platform) {
+    private afs: AngularFirestore, private menu:MenuController, private platform: Platform) {
       this.perfil.celular = '';
-      this.perfil.sms = '';
-      this.verificationId = null;
+      this.sms = '';
+      this.codigoEnviado = null;
     }
 
-  ionViewDidLoad(){
-    this.platform.ready().then( _ => {
-      if ( this.platform.is('cordova') ) {
-        this.firebasePlugin = (<any>window).cordova.plugins.firebase;
-      }
-    });
-  }
   ngOnInit() {
+    this.platform.ready().then(_ =>{
+      this.firebasePlugin = (<any>window).cordova.plugins.firebase;
+    })
   }
 
   verificarSMS(){
-    this.platform.ready().then( _ => {
-      if ( this.platform.is('cordova') ) {
-
-        console.log(this.verificationId, this.perfil.sms); 
-        this.firebasePlugin.auth.signInWithVerificationId(this.verificationId, this.perfil.sms)
-        .then(userInfo => {
-          console.log("Sucesso: ", userInfo);
-          this.mensagem = 'Celular verificado com sucesso, crie seu perfil agora!';
-          this.sucesso = true;
-        })
-        .catch(error => {
-          console.log("Erro: ", error); 
-        });
-
-      }
-    });
+    this.platform.ready().then(_ => {
+      this.firebasePlugin.auth.signInWithVerificationId(this.verificationId, this.sms).then(userInfo => {
+        console.log(userInfo);
+        this.sucesso = true;
+      })
+      .catch(error => {
+        console.log(error);
+      })
+    })
   }
 
   enviarSMS(){
-    this.platform.ready().then( _ => {
-      if ( this.platform.is('cordova') ) {          
-        this.firebasePlugin.auth.verifyPhoneNumber(this.perfil.celular, 0)
-        .then(verificationId => {
-          console.log("Telefone Verificado: ", verificationId); 
-          this.codeSended     = true;
-          this.verificationId = verificationId;
-        })
-        .catch(error => {
-          console.log("Erro: ", error); 
-        });
-      }
-    });
-  }
+    this.platform.ready().then(_ => {
+      this.firebasePlugin.auth.verifyPhoneNumber(this.perfil.celular,0).then(verificationId =>{
+        this.codigoEnviado = true;
+        this.verificationId = verificationId;
+      })
+      .catch(error => {
+        console.log(error);
+      })
+  })
+ }
 
   ionViewWillEnter() {
     //Desativa Menu lateral na tela de login

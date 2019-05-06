@@ -29,9 +29,12 @@
     "@ionic/angular": "^4.1.0",
     "body-parser": "^1.18.3",
     "cordova-android": "8.0.0",
+    "cordova-android-firebase-gradle-release": "3.0.0",
+    "cordova-android-play-services-gradle-release": "3.0.0",
     "cordova-browser": "5.0.4",
     "cordova-plugin-device": "2.0.2",
-    "cordova-plugin-firebase-authentication": "1.1.2",
+    "cordova-plugin-firebase": "git+https://github.com/arnesson/cordova-plugin-firebase.git",
+    "cordova-plugin-firebase-authentication": "git+https://github.com/chemerisuk/cordova-plugin-firebase-authentication.git",
     "cordova-plugin-geolocation": "^4.0.1",
     "cordova-plugin-googlemaps": "2.6.2",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
@@ -108,13 +111,20 @@
         "PLAY_SERVICES_VERSION": "15.0.1",
         "ANDROID_SUPPORT_V4_VERSION": "27.+"
       },
+      "cordova-android-play-services-gradle-release": {
+        "PLAY_SERVICES_VERSION": "15.+"
+      },
       "cordova-plugin-firebase-authentication": {
         "FIREBASE_AUTH_VERSION": "16.1.+"
+      },
+      "cordova-plugin-firebase": {},
+      "cordova-android-firebase-gradle-release": {
+        "FIREBASE_VERSION": "15.+"
       }
     },
     "platforms": [
-      "android",
-      "browser"
+      "browser",
+      "android"
     ]
   }
 }
