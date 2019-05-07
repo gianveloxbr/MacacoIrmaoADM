@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "858080881111",
+    "firebase_url": "https://app-febre-amarela.firebaseio.com",
+    "project_id": "app-febre-amarela",
+    "storage_bucket": "app-febre-amarela.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:858080881111:android:ada78aae1c161586",
+        "android_client_info": {
+          "package_name": "com.veloxsz.febreapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "858080881111-mfktg7sbjgqda8jo1ikvpl4t2f0ec4ie.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.veloxsz.febreapp",
+            "certificate_hash": "999bac4b2834d889add3ab920ba18697b171bc5f"
+          }
+        },
+        {
+          "client_id": "858080881111-e55olfglkmsahc96dmtk7k26ju26nh2t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgdB4LBJkCaUV1eRx4Q22OJI1PikK5mjo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "858080881111-e55olfglkmsahc96dmtk7k26ju26nh2t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

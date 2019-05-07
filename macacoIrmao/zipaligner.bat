@@ -1,0 +1,1 @@
+zipalign -v 4 platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk releases/AppFebre.apk

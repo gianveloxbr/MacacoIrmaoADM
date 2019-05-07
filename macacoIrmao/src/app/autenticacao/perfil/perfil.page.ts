@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import {AngularFirestore} from '@angular/fire/firestore';
 import { Perfil } from '../../modelos/perfil';
-import {NavController,MenuController,Platform} from '@ionic/angular'; 
+import {NavController,MenuController,Platform,AlertController} from '@ionic/angular'; 
+import { Alert } from 'selenium-webdriver';
 
 
 @Component({
@@ -21,10 +22,12 @@ export class PerfilPage implements OnInit {
   sucesso: boolean;
 
   constructor(private afAuth: AngularFireAuth, private navCtrl: NavController, 
-    private afs: AngularFirestore, private menu:MenuController, private platform: Platform) {
+    private afs: AngularFirestore, private menu:MenuController, private platform: Platform,private alertController: AlertController) {
       this.perfil.celular = '';
       this.sms = '';
       this.codigoEnviado = null;
+      this.sucesso = null;
+      this.verificationId = '';
     }
 
   ngOnInit() {
@@ -34,7 +37,10 @@ export class PerfilPage implements OnInit {
   }
 
   verificarSMS(){
-    this.platform.ready().then(_ => {
+    if(this.verificationId){
+    this.sucesso = true;
+    }
+    /*this.platform.ready().then(_ => {
       this.firebasePlugin.auth.signInWithVerificationId(this.verificationId, this.sms).then(userInfo => {
         console.log(userInfo);
         this.sucesso = true;
@@ -42,7 +48,7 @@ export class PerfilPage implements OnInit {
       .catch(error => {
         console.log(error);
       })
-    })
+    })*/
   }
 
   enviarSMS(){
