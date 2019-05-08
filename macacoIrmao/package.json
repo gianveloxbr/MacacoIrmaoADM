@@ -22,8 +22,9 @@
     "@angular/platform-browser-dynamic": "^7.2.2",
     "@angular/router": "^7.2.2",
     "@ionic-native/core": "^5.5.1",
-    "@ionic-native/geolocation": "^5.3.0",
+    "@ionic-native/geolocation": "^5.5.1",
     "@ionic-native/google-maps": "^5.5.0",
+    "@ionic-native/native-geocoder": "^5.5.1",
     "@ionic-native/splash-screen": "^5.0.0",
     "@ionic-native/status-bar": "^5.0.0",
     "@ionic/angular": "^4.1.0",
@@ -39,6 +40,7 @@
     "cordova-plugin-googlemaps": "2.6.2",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
     "cordova-plugin-ionic-webview": "^3.0.0",
+    "cordova-plugin-nativegeocoder": "3.2.2",
     "cordova-plugin-splashscreen": "5.0.2",
     "cordova-plugin-statusbar": "2.4.2",
     "cordova-plugin-whitelist": "1.3.3",
@@ -89,7 +91,7 @@
   "cordova": {
     "plugins": {
       "cordova-plugin-geolocation": {
-        "GEOLOCATION_USAGE_DESCRIPTION": "Para localizar"
+        "GEOLOCATION_USAGE_DESCRIPTION": "To locate you"
       },
       "cordova-sms-plugin": {
         "APP_ID": "310896449581241",
@@ -120,7 +122,8 @@
       "cordova-plugin-firebase": {},
       "cordova-android-firebase-gradle-release": {
         "FIREBASE_VERSION": "15.+"
-      }
+      },
+      "cordova-plugin-nativegeocoder": {}
     },
     "platforms": [
       "browser",

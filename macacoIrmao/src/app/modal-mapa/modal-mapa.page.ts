@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild,ElementRef } from '@angular/core';
 import { ModalController,ToastController,Platform } from '@ionic/angular';
 import {
   GoogleMaps,
@@ -8,6 +8,10 @@ import {
   GoogleMapsAnimation,
   MyLocation
 } from '@ionic-native/google-maps';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
+ 
+declare var google;
 
 @Component({
   selector: 'app-modal-mapa',
@@ -15,10 +19,12 @@ import {
   styleUrls: ['./modal-mapa.page.scss'],
 })
 export class ModalMapaPage implements OnInit {
-  map: GoogleMap;
-  local:string;
+  @ViewChild('map') mapElement: ElementRef;
+  map: any;
+  address:string;
   constructor(public modalController: ModalController,public toastCtrl: ToastController,
-    private platform: Platform) { 
+    private geolocation: Geolocation,
+    private nativeGeocoder: NativeGeocoder) { 
 
   }
 
@@ -27,50 +33,58 @@ export class ModalMapaPage implements OnInit {
   }
 
   ngOnInit() {
-    this.platform.ready();
     this.carregarMapa();
   }
 
-  carregarMapa() {
-    this.map = GoogleMaps.create('map_canvas', {});
-    this.localAtual();
-  }
+ carregarMapa(){
+  this.geolocation.getCurrentPosition().then((resp) => {
+    let latLng = new google.maps.LatLng(resp.coords.latitude, resp.coords.longitude);
+    let mapOptions = {
+      center: latLng,
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
 
-  localAtual(){
-    this.map.clear();
- 
-    // Pega sua localização
-    this.map.getMyLocation().then((local: MyLocation) => {
-      console.log(JSON.stringify(local, null ,2));
- 
-      // Move a camera para o local
-      this.map.animateCamera({
-        target: local.latLng,
-        zoom: 17,
-        duration: 5000
-      });
- 
-      //add a marker
-      let marker: Marker = this.map.addMarkerSync({
-        title: 'App Febre Amarela',
-        snippet: 'Local da Ocorrência',
-        position: local.latLng,
-        animation: GoogleMapsAnimation.BOUNCE
-      });
- 
-      //show the infoWindow
-      marker.showInfoWindow();
-      this.map.on(GoogleMapsEvent.MAP_READY).subscribe(
-        (data) => {
-            console.log("Click MAP",data);
-        }
-      );
-    })
-    .catch(err => {
-      //this.loading.dismiss();
-      this.showToast(err.error_message);
+    this.getAddressFromCoords(resp.coords.latitude, resp.coords.longitude);
+
+    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+
+    this.map.addListener('tilesloaded', () => {
+      console.log('accuracy',this.map);
+      this.getAddressFromCoords(this.map.center.lat(), this.map.center.lng())
     });
-  }
+
+  }).catch((error) => {
+    console.log('Error getting location', error);
+  });
+}
+
+getAddressFromCoords(lattitude, longitude) {
+  console.log("getAddressFromCoords "+lattitude+" "+longitude);
+  let options: NativeGeocoderOptions = {
+    useLocale: true,
+    maxResults: 5
+  };
+
+  this.nativeGeocoder.reverseGeocode(lattitude, longitude, options)
+    .then((result: NativeGeocoderResult[]) => {
+      this.address = "";
+      let responseAddress = [];
+      for (let [key, value] of Object.entries(result[0])) {
+        if(value.length>0)
+        responseAddress.push(value);
+
+      }
+      responseAddress.reverse();
+      for (let value of responseAddress) {
+        this.address += value+", ";
+      }
+      this.address = this.address.slice(0, -2);
+    })
+    .catch((error: any) =>{ 
+      this.address = "Address Not Available!";
+    });
+ }
  
   async showToast(message: string) {
     let toast = await this.toastCtrl.create({

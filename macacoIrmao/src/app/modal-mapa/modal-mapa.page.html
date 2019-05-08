@@ -6,11 +6,14 @@
   
   <ion-content padding>
   <h3>Mapa</h3>
-  <div id="map_canvas"></div>
+  <div #map id="map"></div>
+  <div id="address">
+    <span>{{address}}</span>
+  </div>
   <ion-button (click)="dismiss()">Fechar</ion-button>
   <ion-button>
       Abrir Google Maps
       <ion-icon slot="start" name="pin"></ion-icon>
     </ion-button>
   </ion-content>
-  
+  <script src="https://maps.google.com/maps/api/js?key=AIzaSyCzj_-lvznr3ry-5fqvKPFTODGHQCatoso"></script>

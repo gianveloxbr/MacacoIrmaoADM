@@ -19,6 +19,7 @@ import { AngularFireModule } from '@angular/fire';
 import {AngularFireStorageModule} from '@angular/fire/storage';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 
 firebase.initializeApp(environment.firebase);
 
@@ -41,6 +42,7 @@ firebase.initializeApp(environment.firebase);
     SplashScreen,
     AutenticacaoService,
     Geolocation,
+    NativeGeocoder,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
