@@ -120,9 +120,7 @@
         "FIREBASE_AUTH_VERSION": "16.1.+"
       },
       "cordova-plugin-firebase": {},
-      "cordova-android-firebase-gradle-release": {
-        "FIREBASE_VERSION": "15.+"
-      },
+      "cordova-android-firebase-gradle-release": {},
       "cordova-plugin-nativegeocoder": {}
     },
     "platforms": [
