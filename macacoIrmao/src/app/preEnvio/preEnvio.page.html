@@ -15,7 +15,7 @@
         <br>
         <ion-item id="itemEnvio">
             <ion-thumbnail slot="start">
-              <img src="../../assets/img/placeholder.png">
+              <img *ngIf="imagem" src="{{imagem}}" />
             </ion-thumbnail>
             <ion-label id="lblEnvio">
                 20190412_153855.jpg<br>

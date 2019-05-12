@@ -1,1 +1,1 @@
-C:\Users\veloxsz\AppData\Local\Android\Sdk\build-tools\28.0.3\zipalign -v 4 platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk AppFebre.apk
+zipalign -v 4 platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk AppFebre.apk
