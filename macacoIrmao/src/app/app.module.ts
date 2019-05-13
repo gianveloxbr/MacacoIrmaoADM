@@ -20,6 +20,7 @@ import {AngularFireStorageModule} from '@angular/fire/storage';
 import {AngularFirestoreModule} from '@angular/fire/firestore';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
+import {Camera,CameraOptions} from '@ionic-native/camera/ngx';
 
 firebase.initializeApp(environment.firebase);
 
@@ -43,6 +44,7 @@ firebase.initializeApp(environment.firebase);
     AutenticacaoService,
     Geolocation,
     NativeGeocoder,
+    Camera,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
