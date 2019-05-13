@@ -18,15 +18,12 @@
               <img *ngIf="imagem" src="{{imagem}}" />
             </ion-thumbnail>
             <ion-label id="lblEnvio">
-                20190412_153855.jpg<br>
-                Retirada em: 12/04/2019<br>
-                Horário: 20:53<br>
                 <a href="#">Visualizar</a>
             </ion-label>
           </ion-item>
           <ion-item>
               <ion-label>Localização</ion-label>
-              <ion-input value="Rua Floriano Peixoto 15, Santa Efigênia"></ion-input>
+              <ion-input value="{{endereco}}"></ion-input>
               <ion-button shape="round" size="small" tooltip="Alterar Localização">
                   <ion-icon id="btnMapIcon" slot="icon-only" name="map"></ion-icon>
               </ion-button>
