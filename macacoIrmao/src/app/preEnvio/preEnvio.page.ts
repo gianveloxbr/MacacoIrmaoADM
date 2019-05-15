@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Camera,CameraOptions } from '@ionic-native/camera/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
@@ -24,13 +23,12 @@ export class PreEnvioPage implements OnInit{
     useLocale: true,
     maxResults: 5
   }
-  constructor(private camera:Camera, private webview: WebView, private androidPermissions:AndroidPermissions,
+  constructor(private webview: WebView, private androidPermissions:AndroidPermissions,
     private geoLocation: Geolocation, private nativeGeocoder: NativeGeocoder){
     
   }
 
   ngOnInit(){
-    this.checaPermissao();
     this.getGeolocation();
   }
 
@@ -68,27 +66,5 @@ export class PreEnvioPage implements OnInit{
         address += obj[val]+', ';
       }
     return address.slice(0, -2);
-  }
-
-  //Checa se usuário possui permissão para usar câmera
-  checaPermissao(){    
-    this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(
-      result => this.tirarFoto(),
-      err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.CAMERA)
-    );    
-  }
-
-  tirarFoto(){
-    const options: CameraOptions = {
-      quality:100,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      encodingType: this.camera.EncodingType.PNG,
-      mediaType: this.camera.MediaType.PICTURE
-    }
-    this.camera.getPicture(options).then((url) => {
-      let imagem = this.webview.convertFileSrc(url);
-    }, (err) => {
-      console.log('Erro:' + err);
-    });
   }
 }
