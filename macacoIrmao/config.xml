@@ -3,7 +3,7 @@
     <name>App Febre</name>
     <description>Aplicativo para combate da febre amarela.</description>
     <author email="gianveloxsi@gmail.com" href="http://github.com/gianveloxbr">Gianvelox</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.17.128:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -99,4 +99,5 @@
         <variable name="API_KEY_FOR_ANDROID" value="AIzaSyCzj_-lvznr3ry-5fqvKPFTODGHQCatoso" />
         <variable name="API_KEY_FOR_IOS" value="AIzaSyCzj_-lvznr3ry-5fqvKPFTODGHQCatoso" />
     </plugin>
+    <allow-navigation href="http://192.168.17.128:8100" sessionid="4d0ede78" />
 </widget>

@@ -1,3 +1,4 @@
+import { MbscModule } from '@mobiscroll/angular';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -21,13 +22,16 @@ import {AngularFirestoreModule} from '@angular/fire/firestore';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 import {Camera,CameraOptions} from '@ionic-native/camera/ngx';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
+
 
 firebase.initializeApp(environment.firebase);
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [
+  imports: [ 
+    MbscModule, 
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
@@ -45,6 +49,7 @@ firebase.initializeApp(environment.firebase);
     Geolocation,
     NativeGeocoder,
     Camera,
+    WebView,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
