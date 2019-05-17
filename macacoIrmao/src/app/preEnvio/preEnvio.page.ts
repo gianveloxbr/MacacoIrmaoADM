@@ -1,7 +1,5 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { NativeGeocoder,NativeGeocoderOptions,NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
 import { Ocorrencia } from '../modelos/ocorrencia';
 import { mobiscroll, MbscSelectOptions } from '@mobiscroll/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -47,56 +45,21 @@ export class PreEnvioPage implements OnInit{
     },
     width: 400
 };
-
-  geoencoderOptions: NativeGeocoderOptions = {
-    useLocale: true,
-    maxResults: 5
-  }
-  constructor(private webview: WebView, private geoLocation: Geolocation, private nativeGeocoder: NativeGeocoder,private afAuth: AngularFireAuth, private navCtrl: NavController, 
+  constructor(private webview: WebView,private afAuth: AngularFireAuth, private navCtrl: NavController, 
     private afs: AngularFirestore, private camera: Camera,private platform: Platform, private file: File,
     private afStorage: AngularFireStorage){
     
   }
 
   ngOnInit(){
+    this.hashGen();
     this.tirarFoto();
-    this.getGeolocation();
   }
 
   //Endereco
-  getGeolocation(){
-    this.geoLocation.getCurrentPosition().then((resp) => {
-      this.ocorrencia.latitude = resp.coords.latitude;
-      this.ocorrencia.longitude = resp.coords.longitude; 
-      this.accuracy = resp.coords.accuracy; 
-      this.getGeoencoder(this.ocorrencia.latitude,this.ocorrencia.longitude);
-     }).catch((error) => {
-       alert('Error getting location'+ JSON.stringify(error));
-     });
-  }
 
-  getGeoencoder(latitude,longitude){
-    this.nativeGeocoder.reverseGeocode(latitude, longitude, this.geoencoderOptions)
-    .then((result: NativeGeocoderResult[]) => {
-      this.ocorrencia.endereco = this.generateEndereco(result[0]);
-    })
-    .catch((error: any) => {
-      alert('Erro ao localizar: '+ JSON.stringify(error));
-    });
-  }
-
-  generateEndereco(addressObj){
-      let obj = [];
-      let address = "";
-      for (let key in addressObj) {
-        obj.push(addressObj[key]);
-      }
-      obj.reverse();
-      for (let val in obj) {
-        if(obj[val].length)
-        address += obj[val]+', ';
-      }
-    return address.slice(0, -2);
+  hashGen(){
+    this.hashOcorrencia = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
   }
 
   enviado(){
@@ -104,7 +67,6 @@ export class PreEnvioPage implements OnInit{
   }
 
    enviarDados(){
-    this.hashOcorrencia = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
     this.afAuth.authState.subscribe(auth => {
       this.ocorrencia.idUsuario = auth.uid;
       var setOcorrencia = this.afs.collection('ocorrencia').doc(this.hashOcorrencia).set(this.ocorrencia);
