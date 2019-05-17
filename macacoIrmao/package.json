@@ -24,6 +24,7 @@
     "@ionic-native/android-permissions": "^5.5.1",
     "@ionic-native/camera": "^5.5.1",
     "@ionic-native/core": "^5.5.1",
+    "@ionic-native/file": "^5.6.0",
     "@ionic-native/geolocation": "^5.5.1",
     "@ionic-native/google-maps": "^5.5.0",
     "@ionic-native/ionic-webview": "^5.5.1",
