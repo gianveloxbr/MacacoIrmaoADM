@@ -12,4 +12,5 @@ export interface Ocorrencia {
     cep: string;
     zona: string;
     pais: string;
+    imageUrl: string;
 }

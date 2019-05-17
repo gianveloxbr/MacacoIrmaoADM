@@ -3,7 +3,7 @@
     <name>App Febre</name>
     <description>Aplicativo para combate da febre amarela.</description>
     <author email="gianveloxsi@gmail.com" href="http://github.com/gianveloxbr">Gianvelox</author>
-    <content original-src="index.html" src="http://192.168.17.128:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -43,6 +43,12 @@
         <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
     </platform>
     <platform name="ios">
+        <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
+            <string>Precisamos acessar a camera para retirar a foto do animal</string>
+        </edit-config>
+        <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryUsageDescription">
+            <string>need photo library access to get pictures from there</string>
+        </edit-config>
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
         <icon height="57" src="resources/ios/icon/icon.png" width="57" />
@@ -99,5 +105,4 @@
         <variable name="API_KEY_FOR_ANDROID" value="AIzaSyCzj_-lvznr3ry-5fqvKPFTODGHQCatoso" />
         <variable name="API_KEY_FOR_IOS" value="AIzaSyCzj_-lvznr3ry-5fqvKPFTODGHQCatoso" />
     </plugin>
-    <allow-navigation href="http://192.168.17.128:8100" sessionid="4d0ede78" />
 </widget>

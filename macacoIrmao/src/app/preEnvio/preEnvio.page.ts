@@ -6,7 +6,12 @@ import { Ocorrencia } from '../modelos/ocorrencia';
 import { mobiscroll, MbscSelectOptions } from '@mobiscroll/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
 import {AngularFirestore} from '@angular/fire/firestore';
-import {NavController} from '@ionic/angular'; 
+import {NavController,Platform} from '@ionic/angular'; 
+import { Camera } from '@ionic-native/camera/ngx';
+import { File } from '@ionic-native/file/ngx';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { Observable } from 'rxjs';
+import { finalize } from 'rxjs/operators';
 
 mobiscroll.settings = {
   lang: 'pt-BR',
@@ -14,7 +19,7 @@ mobiscroll.settings = {
 };
 
 const remoteData = {
-  url: 'https://trial.mobiscroll.com/content/countries.json',
+  url: 'https://api.myjson.com/bins/99pc2',
   type: 'json'
 };
 
@@ -25,6 +30,7 @@ const remoteData = {
 })
 
 export class PreEnvioPage implements OnInit{
+  public downloadUrl:Observable<string>;
   ocorrencia = {} as Ocorrencia;
   accuracy: number;
   user: string;
@@ -47,11 +53,13 @@ export class PreEnvioPage implements OnInit{
     maxResults: 5
   }
   constructor(private webview: WebView, private geoLocation: Geolocation, private nativeGeocoder: NativeGeocoder,private afAuth: AngularFireAuth, private navCtrl: NavController, 
-    private afs: AngularFirestore){
+    private afs: AngularFirestore, private camera: Camera,private platform: Platform, private file: File,
+    private afStorage: AngularFireStorage){
     
   }
 
   ngOnInit(){
+    this.tirarFoto();
     this.getGeolocation();
   }
 
@@ -61,7 +69,7 @@ export class PreEnvioPage implements OnInit{
       this.ocorrencia.latitude = resp.coords.latitude;
       this.ocorrencia.longitude = resp.coords.longitude; 
       this.accuracy = resp.coords.accuracy; 
-      this.getGeoencoder(this.latitude,this.longitude);
+      this.getGeoencoder(this.ocorrencia.latitude,this.ocorrencia.longitude);
      }).catch((error) => {
        alert('Error getting location'+ JSON.stringify(error));
      });
@@ -102,5 +110,43 @@ export class PreEnvioPage implements OnInit{
       var setOcorrencia = this.afs.collection('ocorrencia').doc(this.hashOcorrencia).set(this.ocorrencia);
       setOcorrencia.then(() => this.enviado());
     })
+   }
+
+   async tirarFoto(){
+      const options: CameraOptions = {
+        quality: 100,
+        destinationType: this.camera.DestinationType.FILE_URI,
+        sourceType: this.camera.PictureSourceType.CAMERA,
+        correctOrientation: true
+      };
+
+      try{
+        const fileUri: string = await this.camera.getPicture(options);
+        let file: string;
+        if(this.platform.is('ios')){
+          file = fileUri.split('/').pop();
+        }else{
+          file = fileUri.substring(fileUri.lastIndexOf('/') + 1, fileUri.indexOf('?'));
+        }
+        const path: string = fileUri.substring(0, fileUri.lastIndexOf('/'));
+        const buffer: ArrayBuffer = await this.file.readAsArrayBuffer(path,file);
+        const blob: Blob = new Blob([buffer], {type: 'image/jpeg'});
+
+        this.uploadFoto(blob);
+      }catch(error){
+        console.log(error);
+      }
+   }
+
+   uploadFoto(blob: Blob){
+      const ref = this.afStorage.ref('ocorrencias/{this.hashOcorrencia}.jpg');
+      const task = ref.put(blob);
+
+      task.snapshotChanges().pipe(
+        finalize(() => this.downloadUrl = ref.getDownloadURL())
+      ).subscribe();
+
+      this.ocorrencia.imageUrl = JSON.stringify(this.downloadUrl);
+      console.log(this.ocorrencia.imageUrl);
    }
 }

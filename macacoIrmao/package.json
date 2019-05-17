@@ -130,7 +130,9 @@
         "FIREBASE_VERSION": "15.+"
       },
       "cordova-plugin-nativegeocoder": {},
-      "cordova-plugin-android-permissions": {}
+      "cordova-plugin-android-permissions": {},
+      "cordova-plugin-camera": {},
+      "cordova-plugin-file": {}
     },
     "platforms": [
       "browser",
