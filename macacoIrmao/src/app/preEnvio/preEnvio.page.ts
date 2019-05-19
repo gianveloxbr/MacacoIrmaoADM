@@ -10,6 +10,8 @@ import { File } from '@ionic-native/file/ngx';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { NativeGeocoder,NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
 
 mobiscroll.settings = {
   lang: 'pt-BR',
@@ -30,7 +32,6 @@ const remoteData = {
 export class PreEnvioPage implements OnInit{
   public downloadUrl:Observable<string>;
   ocorrencia = {} as Ocorrencia;
-  accuracy: number;
   user: string;
   hashOcorrencia: string;
   //Select Países
@@ -47,7 +48,7 @@ export class PreEnvioPage implements OnInit{
 };
   constructor(private webview: WebView,private afAuth: AngularFireAuth, private navCtrl: NavController, 
     private afs: AngularFirestore, private camera: Camera,private platform: Platform, private file: File,
-    private afStorage: AngularFireStorage){
+    private afStorage: AngularFireStorage, private geo: Geolocation, private natGeo: NativeGeocoder){
     
   }
 
@@ -55,8 +56,6 @@ export class PreEnvioPage implements OnInit{
     this.hashGen();
     this.tirarFoto();
   }
-
-  //Endereco
 
   hashGen(){
     this.hashOcorrencia = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
@@ -76,7 +75,7 @@ export class PreEnvioPage implements OnInit{
 
    async tirarFoto(){
       const options: CameraOptions = {
-        quality: 100,
+        quality: 70,
         destinationType: this.camera.DestinationType.FILE_URI,
         sourceType: this.camera.PictureSourceType.CAMERA,
         correctOrientation: true
@@ -85,11 +84,7 @@ export class PreEnvioPage implements OnInit{
       try{
         const fileUri: string = await this.camera.getPicture(options);
         let file: string;
-        if(this.platform.is('ios')){
-          file = fileUri.split('/').pop();
-        }else{
-          file = fileUri.substring(fileUri.lastIndexOf('/') + 1, fileUri.indexOf('?'));
-        }
+        file = fileUri.split('/').pop();
         const path: string = fileUri.substring(0, fileUri.lastIndexOf('/'));
         const buffer: ArrayBuffer = await this.file.readAsArrayBuffer(path,file);
         const blob: Blob = new Blob([buffer], {type: 'image/jpeg'});
@@ -101,14 +96,27 @@ export class PreEnvioPage implements OnInit{
    }
 
    uploadFoto(blob: Blob){
-      const ref = this.afStorage.ref('ocorrencias/{this.hashOcorrencia}.jpg');
+      const ref = this.afStorage.ref('ocorrencias/' + this.hashOcorrencia + '.jpg');
       const task = ref.put(blob);
 
       task.snapshotChanges().pipe(
         finalize(() => this.downloadUrl = ref.getDownloadURL())
       ).subscribe();
-
-      this.ocorrencia.imageUrl = JSON.stringify(this.downloadUrl);
-      console.log(this.ocorrencia.imageUrl);
    }
+
+  /*Localização
+  recebeCoordenadas(){
+    this.geo.getCurrentPosition().then((resp) =>{
+      this.ocorrencia.latitude = resp.coords.latitude;
+      this.ocorrencia.longitude = resp.coords.longitude;
+      this.buscaEndereco(this.ocorrencia.latitude,this.ocorrencia.longitude);
+    }).catch((error) => {
+      console.log(error);
+    })
+  }
+
+  buscaEndereco(lat: number, lon: number){
+    const end = this.natGeo.reverseGeocode(lat,lon,{useLocale:true,maxResults:1});
+    this.ocorrencia.endereco = JSON.stringify(end);
+  }*/
 }

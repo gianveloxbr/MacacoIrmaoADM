@@ -15,13 +15,13 @@
         <br>
         <ion-item id="itemEnvio">
             <ion-thumbnail slot="start">
-              <img [src]="ocorrencia.imageUrl | async" *ngIf="ocorrencia.imageUrl | async" />
+              <img [src]="downloadUrl | async" *ngIf="downloadUrl | async" />
             </ion-thumbnail>
             <ion-label id="lblEnvio">
                 <a href="#">Visualizar</a>
             </ion-label>
           </ion-item>
-          <ion-input [(ngModel)]="ocorrencia.imageUrl" value="{{ocorrencia.imageUrl | async}}" style="display:none"></ion-input>
+          <ion-input [(ngModel)]="ocorrencia.imageUrl" value="{{downloadUrl | async}}" style="display:none"></ion-input>
           <ion-item>
               <ion-label>Localização</ion-label>
               <ion-input value="{{endereco}}"></ion-input>

@@ -10,34 +10,10 @@
 </ion-header>
 
 <ion-content>  
-    <div class="row" id="EnviosPreview">
+    <div class="row" id="EnviosPreview" >
         <ion-title>Envios</ion-title>
-        <div class="column">
-            <img class="imgLogo" src="../../assets/img/placeholder.png">
-        </div>
-        <div class="column">
-            <img class="imgLogo" src="../../assets/img/placeholder.png">
-        </div>
-        <div class="column">
-            <img class="imgLogo" src="../../assets/img/placeholder.png">
-        </div>
-        <div class="column">
-            <img class="imgLogo" src="../../assets/img/placeholder.png">
-        </div>
-        <div class="column">
-            <img class="imgLogo" src="../../assets/img/placeholder.png">
-        </div>
-        <div class="column">
-            <img class="imgLogo" src="../../assets/img/placeholder.png">
-        </div>
-        <div class="column">
-            <img class="imgLogo" src="../../assets/img/placeholder.png">
-        </div>
-        <div class="column">
-            <img class="imgLogo" src="../../assets/img/placeholder.png">
-        </div>
-        <div class="column">
-            <img class="imgLogo" src="../../assets/img/placeholder.png">
+        <div class="column" *ngFor="let imgD of imgDatas">
+            <img class="imgLogo" [src]="imgD">
         </div>
     </div>
 </ion-content>
