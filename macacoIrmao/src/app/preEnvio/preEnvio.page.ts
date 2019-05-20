@@ -11,7 +11,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { NativeGeocoder,NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
+import { NativeGeocoder,NativeGeocoderOptions,NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
 
 mobiscroll.settings = {
   lang: 'pt-BR',
@@ -54,6 +54,7 @@ export class PreEnvioPage implements OnInit{
 
   ngOnInit(){
     this.hashGen();
+    this.recebeCoordenadas();
     this.tirarFoto();
   }
 
@@ -104,9 +105,9 @@ export class PreEnvioPage implements OnInit{
       ).subscribe();
    }
 
-  /*Localização
+  //Localização
   recebeCoordenadas(){
-    this.geo.getCurrentPosition().then((resp) =>{
+    this.geo.getCurrentPosition().then((resp) => {
       this.ocorrencia.latitude = resp.coords.latitude;
       this.ocorrencia.longitude = resp.coords.longitude;
       this.buscaEndereco(this.ocorrencia.latitude,this.ocorrencia.longitude);
@@ -115,8 +116,16 @@ export class PreEnvioPage implements OnInit{
     })
   }
 
-  buscaEndereco(lat: number, lon: number){
-    const end = this.natGeo.reverseGeocode(lat,lon,{useLocale:true,maxResults:1});
-    this.ocorrencia.endereco = JSON.stringify(end);
-  }*/
+  buscaEndereco(lat,lon){
+    let geoOptions: NativeGeocoderOptions = {
+      useLocale: true,
+      maxResults:1
+    }
+   this.natGeo.reverseGeocode(lat,lon,geoOptions)
+   .then((res:NativeGeocoderResult[]) => {
+      this.ocorrencia.endereco = JSON.stringify(res[0]);
+   }).catch((error) => {
+      console.log(error);
+   })
+  }
 }

@@ -24,7 +24,7 @@
           <ion-input [(ngModel)]="ocorrencia.imageUrl" value="{{downloadUrl | async}}" style="display:none"></ion-input>
           <ion-item>
               <ion-label>Localização</ion-label>
-              <ion-input value="{{endereco}}"></ion-input>
+              <ion-input [(ngModel)]="ocorrencia.endereco" value="{{ocorrencia.endereco}}"></ion-input>
               <ion-button shape="round" size="small" tooltip="Alterar Localização">
                   <ion-icon id="btnMapIcon" slot="icon-only" name="map"></ion-icon>
               </ion-button>
