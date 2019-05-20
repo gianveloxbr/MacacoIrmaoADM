@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-
-@Component({
+import {NavController} from '@ionic/angular';Component({
   selector: 'app-enviado',
   templateUrl: './enviado.page.html',
   styleUrls: ['./enviado.page.scss'],
 })
 export class EnviadoPage implements OnInit {
 
-  constructor() { }
+  constructor(private navCtrl:NavController) { }
 
   ngOnInit() {
   }
