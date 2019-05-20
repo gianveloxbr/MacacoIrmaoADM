@@ -12,4 +12,8 @@ export class EnviadoPage implements OnInit {
   ngOnInit() {
   }
 
+  homepage(){
+    this.navCtrl.navigateForward('/home');
+  }
+
 }
