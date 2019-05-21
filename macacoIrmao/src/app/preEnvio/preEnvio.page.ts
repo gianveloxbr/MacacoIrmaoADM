@@ -77,15 +77,11 @@ export class PreEnvioPage implements OnInit{
     this.hashOcorrencia = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
   }
 
-  enviado(){
-    this.navCtrl.navigateForward('/enviado');
-  }
-
    enviarDados(){
     this.afAuth.authState.subscribe(auth => {
       this.ocorrencia.idUsuario = auth.uid;
       var setOcorrencia = this.afs.collection('ocorrencia').doc(this.hashOcorrencia).set(this.ocorrencia);
-      setOcorrencia.then(() => this.enviado());
+      setOcorrencia.then(() => console.log('OK'));
     })
    }
 
