@@ -12,6 +12,7 @@
 <ion-content>    
     <div id="preInfo">
         <ion-title>Enviar</ion-title>
+        <div id="map_canvas"></div>
         <br>
         <ion-item id="itemEnvio">
             <ion-thumbnail slot="start">
@@ -22,12 +23,11 @@
             </ion-label>
           </ion-item>
           <ion-input [(ngModel)]="ocorrencia.imageUrl" value="{{downloadUrl | async}}" style="display:none"></ion-input>
+          <ion-input [(ngModel)]="ocorrencia.latitude" [value]="ocorrencia.latitude" style="display:none"></ion-input>
+          <ion-input [(ngModel)]="ocorrencia.longitude" [value]="ocorrencia.longitude" style="display:none"></ion-input>
           <ion-item>
-              <ion-label>Localização</ion-label>
-              <ion-input [(ngModel)]="ocorrencia.endereco" value="{{ocorrencia.endereco}}"></ion-input>
-              <ion-button shape="round" size="small" tooltip="Alterar Localização">
-                  <ion-icon id="btnMapIcon" slot="icon-only" name="map"></ion-icon>
-              </ion-button>
+              <ion-label>Logradouro</ion-label>
+              <ion-input [(ngModel)]="ocorrencia.logradouro" [value]="ocorrencia.logradouro"></ion-input>
             </ion-item>
             <ion-item>
                 <ion-label>Informações Adicionais</ion-label>
@@ -46,7 +46,7 @@
                 </ion-item>
                 <ion-item>
                   <ion-label floating>Município</ion-label>
-                  <ion-input [(ngModel)]="ocorrencia.municipio"></ion-input>
+                  <ion-input [(ngModel)]="ocorrencia.municipio" [value]="ocorrencia.municipio"></ion-input>
                 </ion-item>
                 <ion-item>
                   <ion-label floating>Código IBGE</ion-label>
@@ -86,7 +86,7 @@
                 </ion-item>
                 <ion-item>
                   <ion-label floating>CEP</ion-label>
-                  <ion-input [(ngModel)]="ocorrencia.cep"></ion-input>
+                  <ion-input [(ngModel)]="ocorrencia.cep" [value]="ocorrencia.cep"></ion-input>
                 </ion-item>
                 <ion-item>
                   <ion-label floating>Zona</ion-label>

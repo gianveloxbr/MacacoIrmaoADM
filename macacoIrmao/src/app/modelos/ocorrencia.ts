@@ -2,7 +2,7 @@ export interface Ocorrencia {
     idUsuario: string;    
     latitude: number;
     longitude: number;
-    endereco: string;
+    logradouro:string;
     complemento: string;
     pontoReferencia: string;
     bairro: string;

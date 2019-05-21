@@ -12,6 +12,14 @@ import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder,NativeGeocoderOptions,NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
+import {
+  GoogleMaps,
+  GoogleMap,
+  GoogleMapsEvent,
+  Marker,
+  GoogleMapsAnimation,
+  MyLocation
+} from '@ionic-native/google-maps';
 
 mobiscroll.settings = {
   lang: 'pt-BR',
@@ -31,9 +39,15 @@ const remoteData = {
 
 export class PreEnvioPage implements OnInit{
   public downloadUrl:Observable<string>;
+  lat: number;
+  long: number;
   ocorrencia = {} as Ocorrencia;
   user: string;
   hashOcorrencia: string;
+  map: GoogleMap;
+  local:string;
+  public localCompleto:string;
+  envioPronto:boolean;
   //Select Países
   desktopFilterSettings: MbscSelectOptions = {
     display: 'bubble',
@@ -49,12 +63,13 @@ export class PreEnvioPage implements OnInit{
   constructor(private webview: WebView,private afAuth: AngularFireAuth, private navCtrl: NavController, 
     private afs: AngularFirestore, private camera: Camera,private platform: Platform, private file: File,
     private afStorage: AngularFireStorage, private geo: Geolocation, private natGeo: NativeGeocoder){
-    
+    this.envioPronto = false;
   }
 
   ngOnInit(){
     this.hashGen();
-    this.recebeCoordenadas();
+    this.platform.ready();
+    this.carregaMapa();
     this.tirarFoto();
   }
 
@@ -89,8 +104,9 @@ export class PreEnvioPage implements OnInit{
         const path: string = fileUri.substring(0, fileUri.lastIndexOf('/'));
         const buffer: ArrayBuffer = await this.file.readAsArrayBuffer(path,file);
         const blob: Blob = new Blob([buffer], {type: 'image/jpeg'});
-
+        if(this.envioPronto == true){
         this.uploadFoto(blob);
+        }
       }catch(error){
         console.log(error);
       }
@@ -106,26 +122,43 @@ export class PreEnvioPage implements OnInit{
    }
 
   //Localização
-  recebeCoordenadas(){
-    this.geo.getCurrentPosition().then((resp) => {
-      this.ocorrencia.latitude = resp.coords.latitude;
-      this.ocorrencia.longitude = resp.coords.longitude;
-      this.buscaEndereco(this.ocorrencia.latitude,this.ocorrencia.longitude);
+  buscaEndereco(){
+    this.map.clear();
+    this.map.getMyLocation().then((local:MyLocation)=> {
+      let marker: Marker = this.map.addMarkerSync({
+        title: 'App Febre Amarela',
+        snippet: 'Você está aqui!',
+        position: local.latLng,
+        animation: GoogleMapsAnimation.BOUNCE
+      });
+      this.map.animateCamera({
+        target: local.latLng,
+        zoom: 17,
+        duration: 5000
+      });
+      marker.showInfoWindow();
+    this.lat = local.latLng.lat;
+    this.long = local.latLng.lng;
+    this.ocorrencia.latitude = this.lat;
+    this.ocorrencia.longitude = this.long;
+    this.geraEndereco(this.lat,this.long);
+    this.envioPronto = true;
     }).catch((error) => {
       console.log(error);
     })
   }
 
-  buscaEndereco(lat,lon){
-    let geoOptions: NativeGeocoderOptions = {
-      useLocale: true,
-      maxResults:1
-    }
-   this.natGeo.reverseGeocode(lat,lon,geoOptions)
-   .then((res:NativeGeocoderResult[]) => {
-      this.ocorrencia.endereco = JSON.stringify(res[0]);
-   }).catch((error) => {
-      console.log(error);
-   })
+  geraEndereco(latitude:number,longitude:number){
+    this.natGeo.reverseGeocode(latitude,longitude,{useLocale:true,maxResults:1})
+    .then((resultado: NativeGeocoderResult[]) => {
+      this.ocorrencia.logradouro = resultado[0].thoroughfare + ' ' + resultado[0].subThoroughfare;
+      this.ocorrencia.municipio = resultado[0].locality;
+      this.ocorrencia.cep = resultado[0].postalCode;
+    })
+  }
+
+  carregaMapa(){
+    this.map = GoogleMaps.create('map_canvas',{});
+    this.buscaEndereco();
   }
 }
