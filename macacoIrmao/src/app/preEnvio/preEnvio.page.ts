@@ -138,12 +138,12 @@ export class PreEnvioPage implements OnInit{
   }
 
   //Preview Imagem
-  async modPreview(url){
-    console.log(url);
+  async modPreview(){
+    console.log(this.downloadUrl);
     const modal = await this.modalController.create({
       component: ModalPreviewPage,
       componentProps:{
-        urlIMG: url
+        urlIMG: this.downloadUrl
       }
     });
     await modal.present();
