@@ -19,6 +19,7 @@
               <img [src]="downloadUrl | async" *ngIf="downloadUrl | async" style="height: 100%"/>
             </ion-thumbnail>
             <ion-label id="lblEnvio">
+              <ion-button shape="round" id="btnPreview" (click)="modPreview(downloadUrl)">Pré-Visualizar</ion-button>
             </ion-label>
           </ion-item>
           <ion-input [(ngModel)]="ocorrencia.imageUrl" value="{{downloadUrl | async}}" style="display:none"></ion-input>
@@ -54,35 +55,6 @@
                 <ion-item>
                   <ion-label floating>Estado</ion-label>
                   <ion-input [(ngModel)]="ocorrencia.estado" [value]="ocorrencia.estado"></ion-input>
-                  <!--<ion-select [(ngModel)]="ocorrencia.uf" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="Select One">
-                    <ion-select-option value="AC">Acre</ion-select-option>
-                    <ion-select-option value="AL">Alagoas</ion-select-option>
-                    <ion-select-option value="AP">Amapá</ion-select-option>
-                    <ion-select-option value="AM">Amazonas</ion-select-option>
-                    <ion-select-option value="BA">Bahia</ion-select-option>
-                    <ion-select-option value="CE">Ceará</ion-select-option>
-                    <ion-select-option value="DF">Distrito Federal</ion-select-option>
-                    <ion-select-option value="ES">Espírito Santo</ion-select-option>
-                    <ion-select-option value="GO">Goiás</ion-select-option>
-                    <ion-select-option value="MA">Maranhão</ion-select-option>
-                    <ion-select-option value="MT">Mato Grosso</ion-select-option>
-                    <ion-select-option value="MS">Mato Grosso do Sul</ion-select-option>
-                    <ion-select-option value="MG">Minas Gerais</ion-select-option>
-                    <ion-select-option value="PA">Pará</ion-select-option>
-                    <ion-select-option value="PB">Paraíba</ion-select-option>
-                    <ion-select-option value="PR">Paraná</ion-select-option>
-                    <ion-select-option value="PE">Pernambuco</ion-select-option>
-                    <ion-select-option value="PI">Piauí</ion-select-option>
-                    <ion-select-option value="RJ">Rio de Janeiro</ion-select-option>
-                    <ion-select-option value="RN">Rio Grande do Norte</ion-select-option>
-                    <ion-select-option value="RS">Rio Grande do Sul</ion-select-option>
-                    <ion-select-option value="RO">Rondônia</ion-select-option>
-                    <ion-select-option value="RR">Roraima</ion-select-option>
-                    <ion-select-option value="SC">Santa Catarina</ion-select-option>
-                    <ion-select-option value="SP">São Paulo</ion-select-option>
-                    <ion-select-option value="SE">Sergipe</ion-select-option>
-                    <ion-select-option value="TO">Tocantins</ion-select-option>
-                  </ion-select>-->
                 </ion-item>
                 <ion-item>
                   <ion-label floating>CEP</ion-label>
@@ -105,7 +77,7 @@
                 </ion-item>
     </div>
     <div id="Envio">
-        <ion-button shape="round" id="btnEnvio" (click)="enviarDados()" routerLink="/enviado" routerDirection="root">
+        <ion-button shape="round" id="btnEnvio" (click)="enviarDados()">
             <ion-icon id="btnEnvioIcon" slot="icon-only" name="send"></ion-icon>
             <ion-label>Enviar</ion-label>
         </ion-button>

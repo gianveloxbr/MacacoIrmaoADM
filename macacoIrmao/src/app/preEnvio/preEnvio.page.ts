@@ -1,7 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { Ocorrencia } from '../modelos/ocorrencia';
-import { mobiscroll, MbscSelectOptions } from '@mobiscroll/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
 import {AngularFirestore} from '@angular/fire/firestore';
 import {NavController,Platform, PopoverController} from '@ionic/angular'; 
@@ -13,15 +12,8 @@ import { finalize } from 'rxjs/operators';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder,NativeGeocoderOptions,NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
 import {GoogleMaps, GoogleMap, GoogleMapsEvent, Marker, GoogleMapsAnimation, MyLocation} from '@ionic-native/google-maps';
-mobiscroll.settings = {
-  lang: 'pt-BR',
-  theme: 'ios'
-};
-
-const remoteData = {
-  url: 'https://api.myjson.com/bins/99pc2',
-  type: 'json'
-};
+import {ModalController} from '@ionic/angular';
+import {ModalPreviewPage} from '../modal-preview/modal-preview.page';
 
 @Component({
   selector: 'app-preEnvio',
@@ -40,21 +32,10 @@ export class PreEnvioPage implements OnInit{
   local:string;
   public localCompleto:string;
   envioPronto:boolean;
-  //Select Países
-  desktopFilterSettings: MbscSelectOptions = {
-    display: 'bubble',
-    touchUi: false,
-    data: remoteData,
-    filter: true,
-    group: {
-        groupWheel: false,
-        header: false
-    },
-    width: 400
-};
   constructor(private webview: WebView,private afAuth: AngularFireAuth, private navCtrl: NavController, 
     private afs: AngularFirestore, private camera: Camera,private platform: Platform, private file: File,
-    private afStorage: AngularFireStorage, private geo: Geolocation, private natGeo: NativeGeocoder){
+    private afStorage: AngularFireStorage, private geo: Geolocation, private natGeo: NativeGeocoder,
+    private modalController: ModalController){
     this.envioPronto = false;
   }
 
@@ -69,11 +50,15 @@ export class PreEnvioPage implements OnInit{
     this.hashOcorrencia = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
   }
 
+  enviado(){
+    this.navCtrl.navigateForward('/enviado');
+  }
+
    enviarDados(){
     this.afAuth.authState.subscribe(auth => {
       this.ocorrencia.idUsuario = auth.uid;
       var setOcorrencia = this.afs.collection('ocorrencia').doc(this.hashOcorrencia).set(this.ocorrencia);
-      setOcorrencia.then(() => console.log('OK'));
+      setOcorrencia.then(() => this.enviado());
     })
    }
 
@@ -151,4 +136,18 @@ export class PreEnvioPage implements OnInit{
     this.map = GoogleMaps.create('map_canvas',{});
     this.buscaEndereco();
   }
+
+  //Preview Imagem
+  async modPreview(url){
+    console.log(url);
+    const modal = await this.modalController.create({
+      component: ModalPreviewPage,
+      componentProps:{
+        urlIMG: url
+      }
+    });
+    await modal.present();
+  }
+
+
 }

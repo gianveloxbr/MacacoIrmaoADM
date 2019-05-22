@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 
 import { PreEnvioPage } from './preEnvio.page';
+import { ModalPreviewPage} from '../modal-preview/modal-preview.page';
 
 @NgModule({
   imports: [ 
@@ -20,6 +21,7 @@ import { PreEnvioPage } from './preEnvio.page';
       }
     ])
   ],
-  declarations: [PreEnvioPage]
+  declarations: [PreEnvioPage,ModalPreviewPage],
+  entryComponents: [ModalPreviewPage]
 })
 export class PreEnvioPageModule {}
