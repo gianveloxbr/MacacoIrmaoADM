@@ -8,7 +8,7 @@ export interface Ocorrencia {
     bairro: string;
     municipio: string;
     codIBGE: number;
-    uf: string;
+    estado: string;
     cep: string;
     zona: string;
     pais: string;

@@ -4,7 +4,7 @@ import { Ocorrencia } from '../modelos/ocorrencia';
 import { mobiscroll, MbscSelectOptions } from '@mobiscroll/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
 import {AngularFirestore} from '@angular/fire/firestore';
-import {NavController,Platform} from '@ionic/angular'; 
+import {NavController,Platform, PopoverController} from '@ionic/angular'; 
 import { Camera,CameraOptions } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { AngularFireStorage } from '@angular/fire/storage';
@@ -12,15 +12,7 @@ import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { NativeGeocoder,NativeGeocoderOptions,NativeGeocoderResult } from '@ionic-native/native-geocoder/ngx';
-import {
-  GoogleMaps,
-  GoogleMap,
-  GoogleMapsEvent,
-  Marker,
-  GoogleMapsAnimation,
-  MyLocation
-} from '@ionic-native/google-maps';
-
+import {GoogleMaps, GoogleMap, GoogleMapsEvent, Marker, GoogleMapsAnimation, MyLocation} from '@ionic-native/google-maps';
 mobiscroll.settings = {
   lang: 'pt-BR',
   theme: 'ios'
@@ -150,6 +142,8 @@ export class PreEnvioPage implements OnInit{
       this.ocorrencia.logradouro = resultado[0].thoroughfare + ' ' + resultado[0].subThoroughfare;
       this.ocorrencia.municipio = resultado[0].locality;
       this.ocorrencia.cep = resultado[0].postalCode;
+      this.ocorrencia.pais = resultado[0].countryName;
+      this.ocorrencia.estado = resultado[0].administrativeArea;
     })
   }
 

@@ -16,10 +16,9 @@
         <br>
         <ion-item id="itemEnvio">
             <ion-thumbnail slot="start">
-              <img [src]="downloadUrl | async" *ngIf="downloadUrl | async" />
+              <img [src]="downloadUrl | async" *ngIf="downloadUrl | async" style="height: 100%"/>
             </ion-thumbnail>
             <ion-label id="lblEnvio">
-                <a href="#">Visualizar</a>
             </ion-label>
           </ion-item>
           <ion-input [(ngModel)]="ocorrencia.imageUrl" value="{{downloadUrl | async}}" style="display:none"></ion-input>
@@ -53,8 +52,9 @@
                   <ion-input type="number" [(ngModel)]="ocorrencia.codIBGE"></ion-input>
                 </ion-item>
                 <ion-item>
-                  <ion-label floating>UF</ion-label>
-                  <ion-select [(ngModel)]="ocorrencia.uf" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="Select One">
+                  <ion-label floating>Estado</ion-label>
+                  <ion-input [(ngModel)]="ocorrencia.estado" [value]="ocorrencia.estado"></ion-input>
+                  <!--<ion-select [(ngModel)]="ocorrencia.uf" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="Select One">
                     <ion-select-option value="AC">Acre</ion-select-option>
                     <ion-select-option value="AL">Alagoas</ion-select-option>
                     <ion-select-option value="AP">Amapá</ion-select-option>
@@ -82,7 +82,7 @@
                     <ion-select-option value="SP">São Paulo</ion-select-option>
                     <ion-select-option value="SE">Sergipe</ion-select-option>
                     <ion-select-option value="TO">Tocantins</ion-select-option>
-                  </ion-select>
+                  </ion-select>-->
                 </ion-item>
                 <ion-item>
                   <ion-label floating>CEP</ion-label>
@@ -100,7 +100,8 @@
                 </ion-item>
                 <ion-item>
                   <ion-label floating>País</ion-label>
-                  <mbsc-select [(ngModel)]="ocorrencia.pais" [options]="desktopFilterSettings"></mbsc-select>
+                  <ion-input [(ngModel)]="ocorrencia.pais" [value]="ocorrencia.pais"></ion-input>
+                  <!--<mbsc-select [(ngModel)]="ocorrencia.pais" [options]="desktopFilterSettings"></mbsc-select>-->
                 </ion-item>
     </div>
     <div id="Envio">
