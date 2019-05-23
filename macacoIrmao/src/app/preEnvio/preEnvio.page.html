@@ -22,6 +22,7 @@
             <ion-button shape="round" id="btnPreview" (click)="modPreview()">Pré-Visualizar</ion-button>
             </ion-label>
           </ion-item>-->
+          <ion-button shape="round" id="btnPreview" (click)="modPreview()">Pré-Visualizar</ion-button>
           <ion-input [(ngModel)]="ocorrencia.imageUrl" value="{{downloadUrl | async}}" style="display:none"></ion-input>
           <ion-input [(ngModel)]="ocorrencia.latitude" [value]="ocorrencia.latitude" style="display:none"></ion-input>
           <ion-input [(ngModel)]="ocorrencia.longitude" [value]="ocorrencia.longitude" style="display:none"></ion-input>
