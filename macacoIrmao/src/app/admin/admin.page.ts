@@ -12,9 +12,9 @@ import { AngularFirestore } from '@angular/fire/firestore';
   styleUrls: ['./admin.page.scss'],
 })
 export class AdminPage implements OnInit {
-  public userUID: string;
-  public ocorData: [];
-  public ocorDatas: [];
+  public userUID: [];
+  public ocorData = [];
+  public ocorDatas = [];
   constructor(public modalController: ModalController,private afAuth:AngularFireAuth,
     private afs: AngularFirestore) { 
 
