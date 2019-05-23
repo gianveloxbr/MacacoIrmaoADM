@@ -3,6 +3,8 @@ import { ModalController } from '@ionic/angular';
 import { ModalFotoPage } from '../modal-foto/modal-foto.page';
 import { ModalMapaPage } from '../modal-mapa/modal-mapa.page';
 import { ModalStatusPage } from '../modal-status/modal-status.page';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-admin',
@@ -10,8 +12,11 @@ import { ModalStatusPage } from '../modal-status/modal-status.page';
   styleUrls: ['./admin.page.scss'],
 })
 export class AdminPage implements OnInit {
-
-  constructor(public modalController: ModalController) { 
+  public userUID: string;
+  public ocorData: [];
+  public ocorDatas: [];
+  constructor(public modalController: ModalController,private afAuth:AngularFireAuth,
+    private afs: AngularFirestore) { 
 
   }
 
@@ -40,5 +45,19 @@ export class AdminPage implements OnInit {
     });
 
     await modal.present();
+  }
+
+  async getOcorrencia(){
+    this.afAuth.authState.subscribe(auth => {
+      var getOcor = this.afs.collection('ocorrencia');
+      getOcor.ref.get().then((doc) => {
+        doc.forEach((info) => {
+          this.userUID = info.data().idUsuario;
+          this.ocorData.push(this.userUID);
+          this.ocorDatas = this.ocorData;
+        })          
+
+      })
+    })
   }
 }

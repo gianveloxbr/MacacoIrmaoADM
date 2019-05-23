@@ -27,7 +27,7 @@ export class HomePage implements OnInit{
   getUserData(){
     this.afAuth.authState.subscribe(auth => {
       this.user = auth.uid;
-      var getUser = this.afs.collection('perfil').doc(this.user);
+      var getUser = this.afs.collection('perfil/admin/').doc(this.user);
       getUser.ref.get().then((doc) =>{
         if (doc.exists) {
            this.nome = doc.data().nome;
