@@ -12,20 +12,27 @@ import { AngularFirestore } from '@angular/fire/firestore';
   styleUrls: ['./admin.page.scss'],
 })
 export class AdminPage implements OnInit {
-  public userUID: string;
-  public ocorData: [];
-  public ocorDatas: [];
+  public userUID = [];
+  public userIMG = [];
+  public userLat = [];
+  public userLon = [];
+  public ocorData = [];
+  public ocorDatas = [];
   constructor(public modalController: ModalController,private afAuth:AngularFireAuth,
     private afs: AngularFirestore) { 
 
   }
 
   ngOnInit() {
+    this.getOcorrencia();
   }
 
   async showModalFoto(){
     const modal = await this.modalController.create({
-      component: ModalFotoPage
+      component: ModalFotoPage,
+      componentProps: {
+        urlImage: this.userIMG
+      }
     });
 
     await modal.present();
@@ -33,7 +40,11 @@ export class AdminPage implements OnInit {
 
   async showModalMapa(){
     const modal = await this.modalController.create({
-      component: ModalMapaPage
+      component: ModalMapaPage,
+      componentProps: {
+        userLat: this.userLat,
+        userLon: this.userLon
+      }
     });
 
     await modal.present();
@@ -53,7 +64,10 @@ export class AdminPage implements OnInit {
       getOcor.ref.get().then((doc) => {
         doc.forEach((info) => {
           this.userUID = info.data().idUsuario;
-          this.ocorData.push(this.userUID);
+          this.userIMG = info.data().imageUrl;
+          this.userLat = info.data().latitude;
+          this.userLon = info.data().longitude;
+          this.ocorData.push(this.userUID,this.userIMG,this.userLat,this.userLon);
           this.ocorDatas = this.ocorData;
         })          
 
