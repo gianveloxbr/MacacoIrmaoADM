@@ -14,6 +14,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export class AdminPage implements OnInit {
   public userUID = [];
   public userIMG = [];
+  public ocorrenciaUID = [];
   public userLat = [];
   public userLon = [];
   public ocorData = [];
@@ -52,7 +53,11 @@ export class AdminPage implements OnInit {
 
   async showModalStatus(){
     const modal = await this.modalController.create({
-      component: ModalStatusPage
+      component: ModalStatusPage,
+
+      componentProps: {
+        idOcorrencia: this.ocorrenciaUID
+      }
     });
 
     await modal.present();
@@ -67,6 +72,7 @@ export class AdminPage implements OnInit {
           this.userIMG = info.data().imageUrl;
           this.userLat = info.data().latitude;
           this.userLon = info.data().longitude;
+          this.ocorrenciaUID = info.data().idOcorrencia;
           this.ocorData.push(this.userUID,this.userIMG,this.userLat,this.userLon);
           this.ocorDatas = this.ocorData;
         })          
