@@ -7,6 +7,8 @@ import { ModalController,ToastController,Platform } from '@ionic/angular';
   styleUrls: ['./modal-mapa.page.scss'],
 })
 export class ModalMapaPage implements OnInit {
+  public userLat: number;
+  public userLon: number;
   constructor(public modalController: ModalController,public toastCtrl: ToastController) { 
 
   }

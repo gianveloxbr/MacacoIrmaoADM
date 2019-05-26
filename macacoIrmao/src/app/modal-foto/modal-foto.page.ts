@@ -7,7 +7,7 @@ import { ModalController } from '@ionic/angular';
   styleUrls: ['./modal-foto.page.scss'],
 })
 export class ModalFotoPage implements OnInit {
-
+  public urlImage: string;
   constructor(public modalController: ModalController) { 
 
   }
