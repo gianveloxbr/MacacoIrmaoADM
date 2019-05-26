@@ -13,4 +13,5 @@ export interface Ocorrencia {
     zona: string;
     pais: string;
     imageUrl: string;
+    status:string;
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, AlertController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
+import {Ocorrencia} from '../modelos/ocorrencia';
 
 @Component({
   selector: 'app-modal-status',
@@ -13,6 +14,7 @@ export class ModalStatusPage implements OnInit {
   constructor(public modalController: ModalController, public alertController: AlertController, private afAuth: AngularFireAuth,
     private afs: AngularFirestore) { }
   public idOcorrencia: string;
+  ocorrencia = {} as Ocorrencia;
   ngOnInit() {
   }
 
@@ -23,9 +25,12 @@ export class ModalStatusPage implements OnInit {
   alteraStatus(){
     this.afAuth.authState.subscribe(auth => {
       var updateStatus = this.afs.collection('ocorrencia').ref.where("idOcorrencia", "==", this.idOcorrencia);
-      updateStatus.get().then((doc) => {
-        
+      updateStatus.get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          this.afs.collection('ocorrencia').doc(doc.id).update({status: this.ocorrencia.status});
+        })
       })
+      this.alerta();
     })
   }
   async alerta(){
