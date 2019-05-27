@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { NavController,MenuController } from '@ionic/angular';
 import { AutenticacaoService } from '../../services/autenticacao.service';
@@ -59,7 +59,7 @@ export class LoginPage implements OnInit {
   checarPerfil(){
     this.afAuth.authState.subscribe(auth => {
       this.user = auth.uid;
-      var getUser = this.afs.collection('perfil').doc(this.user);
+      var getUser = this.afs.collection('perfil').collection('admin').doc(this.user);
       var nav =  this.navCtrl;
       getUser.ref.get().then((doc) =>{
         if (doc.exists) {

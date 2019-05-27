@@ -75,7 +75,7 @@ export class PerfilPage implements OnInit {
   criarPerfil(){
     this.afAuth.authState.subscribe(auth => {
       this.user = auth.uid;
-      var setUser = this.afs.collection('perfil').doc('admin/' + this.user).set(this.perfil); 
+      var setUser = this.afs.collection('perfil').collection('admin').doc(this.user).set(this.perfil); 
       setUser.then(() => this.homePage());    
     })
   }
