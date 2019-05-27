@@ -8,6 +8,43 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:858080881111:android:398aeda73809e664",
+        "android_client_info": {
+          "package_name": "com.veloxsz.febreADM"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "858080881111-fpdauk1p6f4qvt80k9b7p9v9c0daescm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.veloxsz.febreADM",
+            "certificate_hash": "36120ab65d9efa1ac5d0165f69cd2b282a325c66"
+          }
+        },
+        {
+          "client_id": "858080881111-e55olfglkmsahc96dmtk7k26ju26nh2t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgdB4LBJkCaUV1eRx4Q22OJI1PikK5mjo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "858080881111-e55olfglkmsahc96dmtk7k26ju26nh2t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:858080881111:android:ada78aae1c161586",
         "android_client_info": {
           "package_name": "com.veloxsz.febreapp"
