@@ -15,11 +15,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "858080881111-fpdauk1p6f4qvt80k9b7p9v9c0daescm.apps.googleusercontent.com",
+          "client_id": "858080881111-mfa5ibg30pg7fgtg8ho5gd7kbce20s8v.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.veloxsz.febreADM",
-            "certificate_hash": "36120ab65d9efa1ac5d0165f69cd2b282a325c66"
+            "certificate_hash": "ceea6c52dc4f2d4f84e82dc7a1d0f15f0d342fac"
           }
         },
         {
