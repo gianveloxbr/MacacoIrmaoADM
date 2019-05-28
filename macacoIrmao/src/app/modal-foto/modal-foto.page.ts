@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController,NavParams } from '@ionic/angular';
 
 @Component({
   selector: 'app-modal-foto',
@@ -8,7 +8,7 @@ import { ModalController } from '@ionic/angular';
 })
 export class ModalFotoPage implements OnInit {
   public urlImage: string;
-  constructor(public modalController: ModalController) { 
+  constructor(public modalController: ModalController,private navParams: NavParams) { 
 
   }
 
@@ -17,6 +17,7 @@ export class ModalFotoPage implements OnInit {
   }
 
   ngOnInit() {
+    this.urlImage = this.navParams.data.urlImage;
   }
 
 }

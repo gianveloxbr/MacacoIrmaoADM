@@ -59,10 +59,10 @@ export class LoginPage implements OnInit {
   checarPerfil(){
     this.afAuth.authState.subscribe(auth => {
       this.user = auth.uid;
-      var getUser = this.afs.collection('perfil').collection('admin').doc(this.user);
+      var getUser = this.afs.collection('perfil').doc('admin');
       var nav =  this.navCtrl;
       getUser.ref.get().then((doc) =>{
-        if (doc.exists) {
+        if (!doc.exists) {
            nav.navigateForward('/home');
         } else {
           nav.navigateForward('/perfil');

@@ -5,6 +5,8 @@ import { ModalMapaPage } from '../modal-mapa/modal-mapa.page';
 import { ModalStatusPage } from '../modal-status/modal-status.page';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
+import {OcorrenciaService} from '../services/ocorrencia.service';
+import {Ocorrencia} from '../ocorrencia';
 
 @Component({
   selector: 'app-admin',
@@ -12,72 +14,80 @@ import { AngularFirestore } from '@angular/fire/firestore';
   styleUrls: ['./admin.page.scss'],
 })
 export class AdminPage implements OnInit {
-  public userUID = [];
-  public userIMG = [];
-  public ocorrenciaUID = [];
-  public userLat = [];
-  public userLon = [];
-  public ocorData = [];
-  public ocorDatas = [];
+  ocorrencias: Ocorrencia[];
   constructor(public modalController: ModalController,private afAuth:AngularFireAuth,
-    private afs: AngularFirestore) { 
+    private afs: AngularFirestore, private ocorrenciaService: OcorrenciaService) { 
 
   }
 
   ngOnInit() {
-    this.getOcorrencia();
+    this.ocorrenciaService.getOcorrencia().subscribe(data => {
+      this.ocorrencias = data.map(e => {
+        return {
+          id: e.payload.doc.id,
+          userID: e.payload.doc.data()['idUsuario'],
+          img: e.payload.doc.data()['imageUrl'],
+          lat: e.payload.doc.data()['latitude'],
+          lon: e.payload.doc.data()['longitude'],
+          status: e.payload.doc.data()['status']
+        } as Ocorrencia;
+      })
+      console.log(Ocorrencia);
+    });
   }
 
-  async showModalFoto(){
+  async showModalFoto(image){
     const modal = await this.modalController.create({
       component: ModalFotoPage,
       componentProps: {
-        urlImage: this.userIMG
+        "urlImage": JSON.stringify(image)
       }
     });
-
     await modal.present();
   }
 
-  async showModalMapa(){
+  async showModalMapa(lati,long){
     const modal = await this.modalController.create({
       component: ModalMapaPage,
       componentProps: {
-        userLat: this.userLat,
-        userLon: this.userLon
+        userLat: lati,
+        userLon: long
       }
     });
 
     await modal.present();
   }
 
-  async showModalStatus(){
+  async showModalStatus(ocorStatus){
     const modal = await this.modalController.create({
       component: ModalStatusPage,
 
       componentProps: {
-        idOcorrencia: this.ocorrenciaUID
+        idOcorrencia:ocorStatus
       }
     });
 
     await modal.present();
   }
 
-  async getOcorrencia(){
+  /*async getOcorrencia(){
     this.afAuth.authState.subscribe(auth => {
       var getOcor = this.afs.collection('ocorrencia');
       getOcor.ref.get().then((doc) => {
         doc.forEach((info) => {
+          /*console.log(this.userUID[info.id] = info.data().idUsuario);
+          console.log(this.userIMG[info.id] = info.data().imageUrl);
+          console.log(this.userLat[info.id] = info.data().latitude);
+          console.log(this.userLon[info.id] = info.data().longitude);
+          console.log(info.id + '=' + info.data().imageUrl);
           this.userUID = info.data().idUsuario;
-          this.userIMG = info.data().imageUrl;
           this.userLat = info.data().latitude;
-          this.userLon = info.data().longitude;
-          this.ocorrenciaUID = info.data().idOcorrencia;
-          this.ocorData.push(this.userUID,this.userIMG,this.userLat,this.userLon);
+          this.ocorData.push(this.userUID,this.userLat);
           this.ocorDatas = this.ocorData;
         })          
 
       })
-    })
-  }
+    })*/
+
+  
 }

@@ -13,17 +13,15 @@
         <table>
           <tr>
             <th>Usuário</th>
-            <th>Data Envio</th>
             <th>Foto</th>
             <th>Local</th>
             <th>Status</th>
           </tr>
-          <tr *ngFor="let data of Dados">
-            <td><a href="#">{{data}}</a></td>
-            <td>20/04/19 - 18:55</td>
-            <td><ion-button (click)="showModalFoto()">Ver</ion-button></td>
-            <td><ion-button (click)="showModalMapa()">Ver</ion-button></td>
-            <td><ion-button (click)="showModalStatus()">Alterar</ion-button></td>
+          <tr *ngFor="let ocorrencia of ocorrencias">
+            <td>{{ocorrencia.userID}}</td>
+            <td><ion-button (click)="showModalFoto(ocorrencia.img)">Ver</ion-button></td>
+            <td><ion-button (click)="showModalMapa(ocorrencia.lat + ',' + ocorrencia.lon)">Ver</ion-button></td>
+            <td><ion-button (click)="showModalStatus(ocorrencia.status)">Alterar</ion-button></td>
           </tr>
         </table>
       </div>
