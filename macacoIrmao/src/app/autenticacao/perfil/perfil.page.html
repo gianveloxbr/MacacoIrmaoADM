@@ -17,7 +17,7 @@
 <ion-item>
   <ion-label floating>Celular</ion-label>
   <ion-input [(ngModel)]="perfil.celular" type="tel" placeholder="Ex: +5534999999999"></ion-input>
-  <ion-button (click)="enviarSMS()">Enviar SMS</ion-button>
+  <!--<ion-button (click)="enviarSMS()">Enviar SMS</ion-button>-->
 </ion-item>
 <br>
 <ion-item [disabled]="!codigoEnviado">
@@ -27,5 +27,5 @@
 </ion-item>
 <br>
 <br>
-<ion-button [disabled]="!sucesso" (click)="criarPerfil()">Criar Perfil</ion-button>
+<ion-button [disabled]="sucesso" (click)="criarPerfil()">Criar Perfil</ion-button>
 </ion-content>

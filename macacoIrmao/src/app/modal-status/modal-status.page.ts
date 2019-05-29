@@ -28,7 +28,7 @@ export class ModalStatusPage implements OnInit {
       var updateStatus = this.afs.collection('ocorrencia').ref.where("idOcorrencia", "==", this.idOcorrencia);
       updateStatus.get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-          this.afs.collection('ocorrencia').doc(doc.id).update({status: this.ocorrencia.status});
+          this.afs.collection('ocorrencia').doc(doc.id).set({status: this.ocorrencia.status});
         })
       })
       this.alerta();

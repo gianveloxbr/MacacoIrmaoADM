@@ -16,6 +16,8 @@ export class ModalMapaPage implements OnInit {
   public municipio: string;
   public estado: string;
   public pais: string;
+  public mapURL: string;
+  public pontoReferencia: string;
   constructor(public modalController: ModalController,public toastCtrl: ToastController,
     private navParams: NavParams, private afs:AngularFirestore, private afAuth:AngularFireAuth) { 
 
@@ -31,15 +33,15 @@ export class ModalMapaPage implements OnInit {
   }
 
   async getDadosUser(){
-    this.afs.collection('ocorrencia').ref.where("idUsuario", "==", this.userID).get().then((doc) => {
-      doc.forEach((dt)=> {
-        this.logradouro = dt.data().logradouro;
-        this.bairro = dt.data().bairro;
-        this.cidade = dt.data().cidade;
-        this.municipio = dt.data().municipio;
-        this.estado = dt.data().estado;
-        this.pais = dt.data().pais;
-      })
+    this.afs.collection('ocorrencia').doc(this.userID).ref.get().then((docLocal) => {
+      this.logradouro = docLocal.data().logradouro;
+      this.bairro = docLocal.data().bairro;
+      this.cidade = docLocal.data().cidade;
+      this.municipio = docLocal.data().municipio;
+      this.estado = docLocal.data().estado;
+      this.pais = docLocal.data().pais;
+      this.pontoReferencia = docLocal.data().pontoReferencia;
+      this.mapURL = 'https://www.google.com/maps/search/?api=1&query=' + docLocal.data().latitude + ',' + docLocal.data().longitude;
     })
   }
  

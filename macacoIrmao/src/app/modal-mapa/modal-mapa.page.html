@@ -18,8 +18,10 @@
   <p>{{estado}}</p>
   <label>País</label>
   <p>{{pais}}</p>
+  <label>Ponto Referência</label>
+  <p>{{pontoReferencia}}</p>
   <ion-button (click)="dismiss()">Fechar</ion-button>
-  <ion-button>
+  <ion-button [href]="mapURL">
       Abrir Google Maps
       <ion-icon slot="start" name="pin"></ion-icon>
     </ion-button>

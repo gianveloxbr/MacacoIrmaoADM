@@ -32,10 +32,12 @@ export class AdminPage implements OnInit {
           img: e.payload.doc.data()['imageUrl'],
           lat: e.payload.doc.data()['latitude'],
           lon: e.payload.doc.data()['longitude'],
-          status: e.payload.doc.data()['status']
+          status: e.payload.doc.data()['status'],
+          nomeSobrenome: e.payload.doc.data()['nomeSobrenome'],
+          celular: e.payload.doc.data()['celular'],
+          dataAtual: e.payload.doc.data()['dataAtual']
         } as Ocorrencia;
       })
-      console.log(Ocorrencia);
     });
   }
 
@@ -43,7 +45,7 @@ export class AdminPage implements OnInit {
     const modal = await this.modalController.create({
       component: ModalFotoPage,
       componentProps: {
-        "urlImage": JSON.stringify(image)
+        "urlImage": image
       }
     });
 
@@ -88,26 +90,5 @@ export class AdminPage implements OnInit {
     })
 
     await modal.present();
-  }
-
-  /*async getOcorrencia(){
-    this.afAuth.authState.subscribe(auth => {
-      var getOcor = this.afs.collection('ocorrencia');
-      getOcor.ref.get().then((doc) => {
-        doc.forEach((info) => {
-          /*console.log(this.userUID[info.id] = info.data().idUsuario);
-          console.log(this.userIMG[info.id] = info.data().imageUrl);
-          console.log(this.userLat[info.id] = info.data().latitude);
-          console.log(this.userLon[info.id] = info.data().longitude);
-          console.log(info.id + '=' + info.data().imageUrl);
-          this.userUID = info.data().idUsuario;
-          this.userLat = info.data().latitude;
-          this.ocorData.push(this.userUID,this.userLat);
-          this.ocorDatas = this.ocorData;
-        })          
-
-      })
-    })*/
-
-  
+  }  
 }
