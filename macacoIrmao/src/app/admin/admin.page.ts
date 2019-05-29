@@ -15,6 +15,9 @@ import {Ocorrencia} from '../ocorrencia';
 })
 export class AdminPage implements OnInit {
   ocorrencias: Ocorrencia[];
+  dataReturned:any;
+  dataReturnedStatus:any;
+  dataReturnedLocation:any;
   constructor(public modalController: ModalController,private afAuth:AngularFireAuth,
     private afs: AngularFirestore, private ocorrenciaService: OcorrenciaService) { 
 
@@ -43,17 +46,28 @@ export class AdminPage implements OnInit {
         "urlImage": JSON.stringify(image)
       }
     });
+
+    modal.onDidDismiss().then((dataReturned) => {
+      if(dataReturned != null){
+        this.dataReturned = dataReturned.data;
+      }
+    })
     await modal.present();
   }
 
-  async showModalMapa(lati,long){
+  async showModalMapa(user){
     const modal = await this.modalController.create({
       component: ModalMapaPage,
       componentProps: {
-        userLat: lati,
-        userLon: long
+        "userID": user
       }
     });
+
+    modal.onDidDismiss().then((dataReturnedLocation) => {
+      if(dataReturnedLocation != null){
+        this.dataReturnedLocation = dataReturnedLocation.data;
+      }
+    })
 
     await modal.present();
   }
@@ -63,9 +77,15 @@ export class AdminPage implements OnInit {
       component: ModalStatusPage,
 
       componentProps: {
-        idOcorrencia:ocorStatus
+        "idOcorrencia":ocorStatus
       }
     });
+
+    modal.onDidDismiss().then((dataReturnedStatus) => {
+      if(dataReturnedStatus != null){
+        this.dataReturnedStatus = dataReturnedStatus.data;
+      }
+    })
 
     await modal.present();
   }

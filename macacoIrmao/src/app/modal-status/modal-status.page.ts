@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, AlertController } from '@ionic/angular';
+import { ModalController, AlertController, NavParams } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import {Ocorrencia} from '../modelos/ocorrencia';
@@ -12,10 +12,11 @@ import {Ocorrencia} from '../modelos/ocorrencia';
 export class ModalStatusPage implements OnInit {
 
   constructor(public modalController: ModalController, public alertController: AlertController, private afAuth: AngularFireAuth,
-    private afs: AngularFirestore) { }
+    private afs: AngularFirestore, private navParams: NavParams) { }
   public idOcorrencia: string;
   ocorrencia = {} as Ocorrencia;
   ngOnInit() {
+    this.idOcorrencia = this.navParams.data.idOcorrencia;
   }
 
   dismiss(){
