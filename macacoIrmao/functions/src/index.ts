@@ -23,7 +23,7 @@ console.log(dataUser);
     }
 
     const db = admin.firestore()
-    const notificationsRef = db.collection('notificacoes').where('idOcorrencia', '==', userId)
+    const notificationsRef = db.collection('notificacoes').where('userId', '==', userId)
 
     const notifications = await notificationsRef.get();
 

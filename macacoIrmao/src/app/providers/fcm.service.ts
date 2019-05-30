@@ -25,19 +25,13 @@ export class FcmService {
     return this.saveTokenToFirestore(token);
   }
 
-  hashGen(){
-    this.hashNotification = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
-  }
-
-
   private saveTokenToFirestore(token){
     if(!token) return;
-    this.hashGen();
     const notificationsRef = this.afs.collection('notifcacoes')
 
     const docData = {
       token,
-      userId: this.hashNotification,
+      userId: 'admin',
     }
 
     return notificationsRef.doc(token).set(docData)
