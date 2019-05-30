@@ -1,4 +1,4 @@
-import * as functions from 'firebase-functions';
+﻿import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 admin.initializeApp();
 
@@ -10,16 +10,15 @@ admin.initializeApp();
 // });
 
 export const novaOcorrenciaNotificacao = functions.firestore
-.document('{ocorrencias/{ocorrenciaId}}')
-.onCreate(async event => {
-    const data = event.data();
-    const userId = data.userId
-    const usuario = data.nomeSobrenome
-
+.document('ocorrencias/{ocorrenciaId}')
+.onCreate(async (event,context) => {
+    const dataUser = event.data();
+console.log(dataUser);
+    const userId = context.params.userId
     const payload = {
         notification: {
             title: 'Nova Ocorrência',
-            body: '${usuario} enviou uma nova ocorrência'
+            body: 'Uma nova ocorrência foi enviada.'
         }
     }
 
@@ -28,7 +27,7 @@ export const novaOcorrenciaNotificacao = functions.firestore
 
     const notifications = await notificationsRef.get();
 
-    const tokens = [];
+    const tokens:string[] = [];
 
     notifications.forEach(result => {
         const token = result.data().token;
