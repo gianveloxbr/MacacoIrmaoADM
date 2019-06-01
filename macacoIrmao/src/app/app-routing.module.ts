@@ -21,10 +21,7 @@ const routes: Routes = [
   { path: 'modal-status', loadChildren: './modal-status/modal-status.module#ModalStatusPageModule' },
   { path: 'login', loadChildren: './autenticacao/login/login.module#LoginPageModule' },
   { path: 'registro', loadChildren: './autenticacao/registro/registro.module#RegistroPageModule' },
-  { path: 'perfil', loadChildren: './autenticacao/perfil/perfil.module#PerfilPageModule' },
-  { path: 'modal-preview', loadChildren: './modal-preview/modal-preview.module#ModalPreviewPageModule' }
-
-
+  { path: 'perfil', loadChildren: './autenticacao/perfil/perfil.module#PerfilPageModule' }
 ];
 
 @NgModule({

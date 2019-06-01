@@ -24,15 +24,8 @@ export class ModalStatusPage implements OnInit {
   }
   
   alteraStatus(){
-    this.afAuth.authState.subscribe(auth => {
-      var updateStatus = this.afs.collection('ocorrencia').ref.where("idOcorrencia", "==", this.idOcorrencia);
-      updateStatus.get().then((querySnapshot) => {
-        querySnapshot.forEach((doc) => {
-          this.afs.collection('ocorrencia').doc(doc.id).set({status: this.ocorrencia.status});
-        })
-      })
+      this.afs.collection('ocorrencia').doc(this.idOcorrencia).update({status: this.ocorrencia.status});
       this.alerta();
-    })
   }
   async alerta(){
     const alerta = await this.alertController.create({

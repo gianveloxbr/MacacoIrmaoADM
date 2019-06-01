@@ -7,10 +7,6 @@ import { NavController, ModalController } from '@ionic/angular';
 import { AutenticacaoService } from './services/autenticacao.service';
 import { Perfil } from './modelos/perfil';
 import { Environment } from '@ionic-native/google-maps';
-import {FcmService} from '../app/providers/fcm.service';
-import { ToastController } from '@ionic/angular';
-import { Subject } from 'rxjs/Subject';
-import { tap } from 'rxjs/operators';
 
 
 @Component({
@@ -49,8 +45,6 @@ export class AppComponent {
     private statusBar: StatusBar,
     private navCtrl: NavController,
     private authService: AutenticacaoService,
-    private fcm: FcmService,
-    private toastCtrl: ToastController,
   ) {
     this.initializeApp();
   }
@@ -64,27 +58,11 @@ export class AppComponent {
       }else{
         this.navCtrl.navigateBack('');
       }
-      this.fcm.getToken();
       Environment.setEnv({
         'API_KEY_FOR_BROWSER_RELEASE':'AIzaSyCzj_-lvznr3ry-5fqvKPFTODGHQCatoso',
         'API_KEY_FOR_BROWSER_DEBUG':'AIzaSyCzj_-lvznr3ry-5fqvKPFTODGHQCatoso'
       });
-      this.fcm.listenToNotifications().pipe(
-        tap(msg => {
-          // show a toast
-          this.showMessage(msg.body);
-        })
-      )
-      .subscribe()
     });
-  }
-
-  async showMessage(msgNotif){
-    const toast = await this.toastCtrl.create({
-      message: msgNotif,
-      duration: 3000
-    });
-    toast.present();
   }
   logoff(){
     this.authService.logoffUsuario()

@@ -1,4 +1,3 @@
-import { MbscModule } from '@mobiscroll/angular';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -9,7 +8,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { environment } from 'src/environments/environment';
+import { environment } from '../environments/environment';
 import { AutenticacaoService } from './services/autenticacao.service';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
@@ -25,7 +24,6 @@ import {Camera} from '@ionic-native/camera/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { File } from '@ionic-native/file/ngx';
 import {Firebase} from '@ionic-native/firebase/ngx';
-import { FCM } from '@ionic-native/fcm/ngx';
 
 
 firebase.initializeApp(environment.firebase);
@@ -33,8 +31,7 @@ firebase.initializeApp(environment.firebase);
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [ 
-    MbscModule, 
+  imports: [
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
@@ -55,7 +52,6 @@ firebase.initializeApp(environment.firebase);
     WebView,
     File,
     Firebase,
-    FCM,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
