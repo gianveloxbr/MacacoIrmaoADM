@@ -24,7 +24,7 @@ exports.notificacao = functions.firestore
       }
      const allTokens = Promise.all(data_snap_arr.map(handleSnapshot));  
      return admin.messaging().sendToDevice(allTokens,payload) */
-    return Promise.all([admin.database().ref('admin/{key}/token').once('value')]).then(
+    return Promise.all([admin.database().ref('admin/"+key+"/token').once('value')]).then(
         results => {
             const token = results[0];
             if(!token.hasChildren()) return null;
