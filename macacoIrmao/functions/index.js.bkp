@@ -1,0 +1,29 @@
+ return Promise.all([admin.database().ref('admin').child(id).child(token).once('value')]).then(
+              results => {
+                  const token = results[1];
+                  if(!token.hasChildren()) return null;
+                  let payload = {
+                    notification: {
+                        title:'Nova Ocorrência',
+                        body:'Uma nova Ocorrência foi registrada'
+                    }
+                }
+                const tokens = Object.keys(token.val());
+                return admin.messaging().sendToDevice(tokens,payload);
+              }
+          )
+          
+          return admin.database().ref('admin').once('value').then(function(snapshot) {
+            let payload = {
+                notification: {
+                    title:'Nova Ocorrência',
+                    body:'Uma nova Ocorrência foi registrada'
+                }}
+              snapshot.forEach(function(childSnapshot) {
+                  var id = childSnapshot.key;
+                  var promise = ref.child('admin').child(id).child('token').once('value');
+                  tokensAdmin.push(promise);
+              })
+              const allTokens = Promise.all(tokensAdmin);
+              return admin.messaging().sendToDevice(allTokens,payload);
+          })
