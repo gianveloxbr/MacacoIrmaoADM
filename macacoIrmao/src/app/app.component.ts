@@ -7,6 +7,9 @@ import { NavController, ModalController } from '@ionic/angular';
 import { AutenticacaoService } from './services/autenticacao.service';
 import { Perfil } from './modelos/perfil';
 import { Environment } from '@ionic-native/google-maps';
+import { FCM } from '@ionic-native/fcm/ngx';
+import { FcmService } from './services/fcm.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -45,6 +48,9 @@ export class AppComponent {
     private statusBar: StatusBar,
     private navCtrl: NavController,
     private authService: AutenticacaoService,
+    private fcm: FCM,
+    private fcms: FcmService,
+    private router: Router
   ) {
     this.initializeApp();
   }
@@ -62,6 +68,16 @@ export class AppComponent {
         'API_KEY_FOR_BROWSER_RELEASE':'AIzaSyCzj_-lvznr3ry-5fqvKPFTODGHQCatoso',
         'API_KEY_FOR_BROWSER_DEBUG':'AIzaSyCzj_-lvznr3ry-5fqvKPFTODGHQCatoso'
       });
+      this.fcm.onNotification().subscribe(data => {
+        console.log(data);
+        if(data.wasTapped){
+          console.log("Received in background");
+          this.router.navigateByUrl('/admin');
+        } else {
+          console.log("Received in foreground");
+          this.router.navigateByUrl('/admin');
+        };
+      })
     });
   }
   logoff(){

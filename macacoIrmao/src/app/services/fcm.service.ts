@@ -11,21 +11,15 @@ export class FcmService {
   adminUid: string;
   constructor(private afs:AngularFirestore, private fcm:FCM, private afAuth: AngularFireAuth) { }
 
-  async getDeviceToken(){
-    let token;
-    token = await this.fcm.getToken();
-    console.log(this.adminUid);
-    return this.sendFirestoreToken(token);
-  }
-
-  getAdminUid(){
+  async getAdminUid(){
     this.afAuth.authState.subscribe(auth => {
       this.adminUid = auth.uid;
     })
+    this.subscribeTopicNotif();
   }
 
-  sendFirestoreToken(token){
-    const adminRef = this.afs.collection('admin')
-    return adminRef.doc(this.adminUid).update({idAdmin: this.adminUid, token: token});
+  subscribeTopicNotif(){
+    this.fcm.subscribeToTopic('admin');
+    console.log('subscribed!');
   }
 }

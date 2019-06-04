@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore,AngularFirestoreDocument } from '@angular/fire/firestore';
 import { AutenticacaoService } from '../services/autenticacao.service';
 import { Observable } from 'rxjs';
-import { MenuController } from '@ionic/angular';
+import { MenuController, NavController } from '@ionic/angular';
 import { AngularFireAuth } from '@angular/fire/auth'; 
+import { FcmService } from '../services/fcm.service';
+import { FCM } from '@ionic-native/fcm/ngx';
 
 export interface Item { nome:String;}
 
@@ -17,11 +19,18 @@ export interface Item { nome:String;}
 export class HomePage implements OnInit{
   public nome: string;
   user: string;
-  constructor(private afs: AngularFirestore,private authService:AutenticacaoService,private menu:MenuController,private afAuth: AngularFireAuth) {
+  constructor(private afs: AngularFirestore,
+    private authService:AutenticacaoService,
+    private menu:MenuController,
+    private afAuth: AngularFireAuth,
+    private fcms: FcmService,
+    private fcm: FCM,
+    private navCtrl:NavController) {
   }
   ngOnInit(){
     this.menu.enable(true);
     this.getUserData();
+    this.fcms.getAdminUid();
   }
 
   getUserData(){
@@ -39,5 +48,4 @@ export class HomePage implements OnInit{
     })      
     })
   }
-
 }

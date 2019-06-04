@@ -24,6 +24,7 @@ import {Camera} from '@ionic-native/camera/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { File } from '@ionic-native/file/ngx';
 import {Firebase} from '@ionic-native/firebase/ngx';
+import { FCM } from '@ionic-native/fcm/ngx';
 
 
 firebase.initializeApp(environment.firebase);
@@ -52,6 +53,7 @@ firebase.initializeApp(environment.firebase);
     WebView,
     File,
     Firebase,
+    FCM,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
