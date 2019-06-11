@@ -5,6 +5,9 @@ admin.initializeApp();
 exports.notificacao = functions.firestore
     .document('ocorrencia/{ocorrenciaId}')
     .onCreate((snap,context) => {
+     var d = new Date();
+     var dl = d.toLocaleString('pt-BR',{timeZone: 'BRT'});
+     snap.ref.update({dataAtual: dl});
      let payload = {
           notification: {
               title: 'Nova ocorrência',
