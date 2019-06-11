@@ -6,7 +6,7 @@ exports.notificacao = functions.firestore
     .document('ocorrencia/{ocorrenciaId}')
     .onCreate((snap,context) => {
      var d = new Date();
-     var dl = d.toLocaleString('pt-BR',{timeZone: 'BRT'});
+     var dl = d.toLocaleString('BR',{timeZone: "America/Sao_Paulo"});
      snap.ref.update({dataAtual: dl});
      let payload = {
           notification: {
