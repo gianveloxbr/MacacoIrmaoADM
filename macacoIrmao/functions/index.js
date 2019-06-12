@@ -25,7 +25,7 @@ exports.notificacao = functions.firestore
         let horaFinal = horaSplit[1];
         return horaFinal;
       }
-     snap.ref.set({dataDia: dataD, dataHora: dataH, dataISO: iso});
+     snap.ref.update({dataDia: dataD, dataHora: dataH, dataISO: iso});
      let payload = {
           notification: {
               title: 'Nova ocorrência',
