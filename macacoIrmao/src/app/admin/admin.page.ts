@@ -7,6 +7,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import {OcorrenciaService} from '../services/ocorrencia.service';
 import {Ocorrencia} from '../ocorrencia';
+import { OrderPipe } from 'ngx-order-pipe'; // <- import OrderModule
 
 @Component({
   selector: 'app-admin',
@@ -19,7 +20,7 @@ export class AdminPage implements OnInit {
   dataReturnedStatus:any;
   dataReturnedLocation:any;
   constructor(public modalController: ModalController,private afAuth:AngularFireAuth,
-    private afs: AngularFirestore, private ocorrenciaService: OcorrenciaService) { 
+    private afs: AngularFirestore, private ocorrenciaService: OcorrenciaService,private order: OrderPipe) { 
 
   }
 
@@ -35,7 +36,9 @@ export class AdminPage implements OnInit {
           status: e.payload.doc.data()['status'],
           nomeSobrenome: e.payload.doc.data()['nomeSobrenome'],
           celular: e.payload.doc.data()['celular'],
-          dataAtual: e.payload.doc.data()['dataAtual']
+          dataDia: e.payload.doc.data()['dataDia'],
+          dataHora: e.payload.doc.data()['dataHora'],
+          dataIso: e.payload.doc.data()['dataISO'],
         } as Ocorrencia;
       })
     });

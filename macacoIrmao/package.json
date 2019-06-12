@@ -64,6 +64,7 @@
     "firebase-admin": "^7.0.0",
     "firebase-functions": "^2.3.1",
     "morgan": "^1.9.1",
+    "ngx-order-pipe": "^2.0.2",
     "rxjs": "~6.3.3",
     "rxjs-compat": "^6.5.2",
     "zone.js": "~0.8.29"

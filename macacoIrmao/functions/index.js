@@ -6,8 +6,26 @@ exports.notificacao = functions.firestore
     .document('ocorrencia/{ocorrenciaId}')
     .onCreate((snap,context) => {
      var d = new Date();
-     var dl = d.toLocaleString('pt-BR',{timeZone: "America/Sao_Paulo"});
-     snap.ref.update({dataAtual: dl});
+     var data = d.toLocaleString('pt-BR',{timeZone: "America/Sao_Paulo"});
+     var iso = Date.parse(data);
+     var dataD = dataDia(data);
+     var dataH = dataHora(data);
+     function dataDia(data){
+        let dataSplit = data.split(' ');
+        let dataDia = dataSplit[0].split('-').reverse();
+        if(dataDia[1].length == 1){
+          dataDia[1] = '0' + dataDia[1];
+        }
+        let dataDiaFinal = dataDia.join('/');
+        return dataDiaFinal;
+      }
+    
+     function dataHora(hora){
+        let horaSplit = hora.split(' ');
+        let horaFinal = horaSplit[1];
+        return horaFinal;
+      }
+     snap.ref.set({dataDia: dataD, dataHora: dataH, dataISO: iso});
      let payload = {
           notification: {
               title: 'Nova ocorrência',

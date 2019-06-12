@@ -10,6 +10,7 @@ export class OcorrenciaService {
   constructor(private afs:AngularFirestore) { }
 
   getOcorrencia(){
-    return this.afs.collection('ocorrencia', ref => ref.orderBy('ocorrencia.dataAtual','desc')).valueChanges();
+    let afsRef = this.afs.collection('ocorrencia', ref => ref.orderBy('dataISO', 'desc'));
+    return afsRef;
   }
 }

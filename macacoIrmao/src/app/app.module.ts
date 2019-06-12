@@ -25,6 +25,7 @@ import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { File } from '@ionic-native/file/ngx';
 import {Firebase} from '@ionic-native/firebase/ngx';
 import { FCM } from '@ionic-native/fcm/ngx';
+import { OrderModule } from 'ngx-order-pipe'; // <- import OrderModule
 
 
 firebase.initializeApp(environment.firebase);
@@ -42,6 +43,7 @@ firebase.initializeApp(environment.firebase);
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireStorageModule,
     AngularFirestoreModule,
+    OrderModule,
   ],
   providers: [
     StatusBar,
