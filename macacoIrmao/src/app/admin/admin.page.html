@@ -20,7 +20,7 @@
             <th>Alterar Status</th>
           </tr>
           <tr *ngFor="let ocorrencia of ocorrencias">
-            <td>{{ocorrencia.nomeSobrenome}}<br>({{ocorrencia.celular}})</td>
+            <td>{{ocorrencia.nomeSobrenome}}<br>(<a href="tel:{{ocorrencia.celular}}">{{ocorrencia.celular}}</a>)</td>
             <td>{{ocorrencia.dataDia}} - {{ocorrencia.dataHora}}</td>
             <td><ion-button (click)="showModalFoto(ocorrencia.img)">Ver</ion-button></td>
             <td><ion-button (click)="showModalMapa(ocorrencia.id)">Ver</ion-button></td>

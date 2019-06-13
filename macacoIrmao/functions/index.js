@@ -8,6 +8,7 @@ exports.notificacao = functions.firestore
      var d = new Date();
      var data = d.toLocaleString('pt-BR',{timeZone: "America/Sao_Paulo"});
      var iso = Date.parse(data);
+     var isoFinal = iso * -1;
      var dataD = dataDia(data);
      var dataH = dataHora(data);
      function dataDia(data){
@@ -25,7 +26,7 @@ exports.notificacao = functions.firestore
         let horaFinal = horaSplit[1];
         return horaFinal;
       }
-     snap.ref.update({dataDia: dataD, dataHora: dataH, dataISO: iso});
+     snap.ref.update({dataDia: dataD, dataHora: dataH, dataISO: isoFinal});
      let payload = {
           notification: {
               title: 'Nova ocorrência',

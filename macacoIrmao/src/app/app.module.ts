@@ -26,6 +26,7 @@ import { File } from '@ionic-native/file/ngx';
 import {Firebase} from '@ionic-native/firebase/ngx';
 import { FCM } from '@ionic-native/fcm/ngx';
 import { OrderModule } from 'ngx-order-pipe'; // <- import OrderModule
+import {HTTP} from '@ionic-native/http/ngx';
 
 
 firebase.initializeApp(environment.firebase);
@@ -56,6 +57,7 @@ firebase.initializeApp(environment.firebase);
     File,
     Firebase,
     FCM,
+    HTTP,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
