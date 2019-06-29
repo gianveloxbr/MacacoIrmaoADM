@@ -35,6 +35,7 @@ export class ModalStatusPage implements OnInit {
     });
 
     await alerta.present();
+    this.dismiss();
   }
 
 }
