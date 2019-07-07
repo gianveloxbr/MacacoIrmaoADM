@@ -15,6 +15,7 @@
             <th>Usuário</th>
             <th>Data</th>
             <th>Foto</th>
+            <th>Estado do Animal</th>
             <th>Local</th>
             <th>Status</th>
             <th>Alterar Status</th>
@@ -23,6 +24,7 @@
             <td>{{ocorrencia.nomeSobrenome}}<br>(<a href="tel:{{ocorrencia.celular}}">{{ocorrencia.celular}}</a>)</td>
             <td>{{ocorrencia.dataDia}} - {{ocorrencia.dataHora}}</td>
             <td><ion-button (click)="showModalFoto(ocorrencia.img)">Ver</ion-button></td>
+            <td>{{ocorrencia.estadoAnimal}}</td>
             <td><ion-button (click)="showModalMapa(ocorrencia.id)">Ver</ion-button></td>
             <td>{{ocorrencia.status}}</td>
             <td><ion-button (click)="showModalStatus(ocorrencia.id)">Alterar</ion-button></td>

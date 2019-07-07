@@ -39,6 +39,7 @@ export class AdminPage implements OnInit {
           dataDia: e.payload.doc.data()['dataDia'],
           dataHora: e.payload.doc.data()['dataHora'],
           dataIso: e.payload.doc.data()['dataISO'],
+          estadoAnimal: e.payload.doc.data()['estadoAnimal'],
         } as Ocorrencia;
       })
     });
